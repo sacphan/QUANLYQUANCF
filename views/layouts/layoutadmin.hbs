@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {{> head_admin}}
+</head>
+<body id="cover" class="set-theme theme-body-light">
+<!-- Begin page -->
+    <div id="wrapper">
+        <!-- start: header -->
+        {{> header_admin}}
+         <!-- end: header -->
+
+        <!-- start: sidebar -->
+            {{> nav_admin}}
+         <!-- end: sidebar -->
+
+        <div class="content-page">
+            <div class="content">
+                <div class="container-fluid">
+                    <!--begin content-->
+                        {{{body}}}
+                     <!--end content-->
+
+                     <!-- start: Footer -->
+                        {{> bottom_admin}}
+                     <!-- end: Footer -->
+                </div>
+            </div>    
+        </div>    
+        
+
+    </div>
+<!-- End page -->
+
+
+    <!-- jQuery  -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/metisMenu.min.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/waves.min.js"></script>
+    <!-- countdown -->
+    <script src="/assets/plugins/admin/countdown/jquery.countdown.min.js"></script>
+    <script src="/assets/pages/countdown.int.js"></script>
+
+    <!-- App js -->
+    <script src="/assets/js/app.js"></script>
+    <!-- Custom js -->
+    <script src="/assets/js/switch-theme.js"></script>
+    <script src="/assets/js/toastr.min.js"></script>
+    <script src="/assets/js/blockUI.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    
+    {{!-- script switch mode --}}
+    <script>
+    $(document).ready(function () {
+        // init data to set theme
+        let data = {
+            timeOut: 0,
+            light: 'fa-cloud-sun',
+            dark: 'fa-cloud-moon'
+        }; // init data to set theme
+
+        let isAutoSwitchTheme = $('meta[name="is-switch-theme"]').attr('content') - '0';
+        console.log( isAutoSwitchTheme);
+
+        if (isAutoSwitchTheme){
+            let mins = 60; // Reset when storage is more than 20mins
+            let now = new Date();
+
+            let setupTime = localStorage.getItem('setupTime');
+            if (setupTime == null) {
+                localStorage.setItem('setupTime', now.getTime());
+                // set theme by time
+                setThemeByTime(now.getHours(), data);
+            } else {
+                // data expired, clear localStorage
+                if(now.getTime()-setupTime > mins*60*1000) {
+                    localStorage.clear();
+                    localStorage.setItem('setupTime', now.getTime());
+                    // set theme by time
+                    setThemeByTime(now.getHours(), data);
+                }else{
+                    initTheme(data);
+                }
+            }
+            /// Reset when storage is more than 20mins
+        }else{
+            initTheme(data);
+        }
+    });
+
+</script>
+
+</body>
+</html>

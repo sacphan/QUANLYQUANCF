@@ -1,11 +1,15 @@
 const express = require("express");
-const exphbs = require("express-handlebars"),
-
+const exphbs = require("express-handlebars")
+const adminRouter = require('./routers/admin')
 port = 4444,
 app = express();
+
+//use admin route
+app.use('/admin', adminRouter);
+
 //config express handlebar
 const hbs = exphbs.create({
-    defaultLayout: "layout",
+    defaultLayout: "layoutadmin",
     extname: 'hbs'
 });
 
