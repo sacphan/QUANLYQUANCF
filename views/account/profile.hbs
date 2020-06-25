@@ -1,0 +1,332 @@
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{{/if}}
+{{#if success}}
+<div class="alert alert-success" role="alert">
+    {{success}}
+</div>
+{{/if}}
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10">
+            <h1>{{profile.f_Username}}</h1>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+
+            <div class="text-center">
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
+                    alt="avatar">
+                <h6>Chọn một hình ảnh khác...</h6>
+                <input type="file" class="text-center center-block file-upload">
+            </div>
+            </hr><br>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+                <div class="panel-body"><a href="/">DoAnCuoiKy.com</a></div>
+            </div>
+
+
+            {{!-- <ul class="list-group">
+            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+          </ul>  --}}
+
+            {{!-- <div class="panel panel-default">
+            <div class="panel-heading">Social Media</div>
+            <div class="panel-body">
+            	<i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+            </div>
+          </div> --}}
+
+        </div>
+        <!--/col-3-->
+
+        <div class="col-sm-9">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#info" role="tab">Thông tin cá nhân</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#matkhau" role="tab">Mật khẩu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#yeuthich" role="tab">Yêu thích</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tabnew" data-toggle="tab" href="#daugia" role="tab">Đấu giá</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tabnew" data-toggle="tab" href="#danhgia" role="tab">Đánh giá</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tabnew" data-toggle="tab" href="#thang" role="tab">Đấu giá thắng</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link tabnew" data-toggle="tab" href="#seller" role="tab">SELLER</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="info" role="tabpanel">
+                    <div class="card-body">
+
+                        <form class="form" action="/account/profile/info" method="post" id="registrationForm">
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="first_name">
+                                        <h4>Họ và tên</h4>
+                                    </label>
+                                    <input type="text" value="{{profile.f_Name}}" class="form-control" name="first_name"
+                                        id="first_name" placeholder="first name" title="enter your first name if any.">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phone">
+                                        <h4>Điện thoại</h4>
+                                    </label>
+                                    <input type="text" value="{{profile.Phone}}" class="form-control" name="phone"
+                                        id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email">
+                                        <h4>Email</h4>
+                                    </label>
+                                    <input type="email" value="{{profile.f_Email}}" class="form-control" name="email"
+                                        id="email" placeholder="you@email.com" title="enter your email.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="DOB">
+                                        <h4>Date Of Birth</h4>
+                                    </label>
+                                    <input type="text" value="{{profile.f_DOB}}" name="DOB" class="form-control"
+                                        id="DOB" placeholder="dd-mm-yyyy" title="enter a location">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i
+                                            class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane " id="matkhau" role="tabpane2">
+                    <div class="card-body">
+                        <form class="form" action="/account/profile/changepassword" method="post" id="registrationForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="location">
+                                        <h4>Mật khẩu hiện tại</h4>
+                                    </label>
+                                    <input type="password" class="form-control" required="" name="password"
+                                        id="location" title="enter your first name if any.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="location">
+                                        <h4>Mật khẩu mới</h4>
+                                    </label>
+                                    <input type="password" class="form-control" required="" name="newpassword"
+                                        id="location" title="enter your first name if any.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="location">
+                                        <h4>Xác nhận mật khẩu mới</h4>
+                                    </label>
+                                    <input type="password" class="form-control" required="" name="confirmnewpassword"
+                                        id="location" title="enter your first name if any.">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i
+                                            class="glyphicon glyphicon-ok-sign"></i> Save</button>
+
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="tab-pane " id="yeuthich" role="tabpane3">
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each watchlist}}
+                                <tr>
+                                    <td>{{Name_Pro}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane " id="daugia" role="tabpane4">
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Bắt đầu</th>
+                                    <th>Kết thúc</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each auctionlist}}
+                                <tr>
+                                    <td>{{Name_Pro}}</td>
+                                    <td>{{Up_Pro}}</td>
+                                    <td>{{Dead_Time}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+                <div class="tab-pane " id="danhgia" role="tabpane5">
+                    <div class="card-body">
+                        <div class="tab-pane " id="danhgia" role="tabpane4">
+                            <b>Điểm đánh giá: </b><p>{{scored}}</p>
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Nhận xét</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each listevaluate}}
+                                        <tr>
+                                            <td>{{STT}}</td>
+                                            <td>{{PRONAME}}</td>
+                                            <td>{{Comment}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="tab-pane " id="thang" role="tabpane6">
+                    <div class="card-body">
+                        <div class="tab-pane " id="thang" role="tabpane7">                          
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Tên sản phẩm</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">Cho điểm</th>
+                                            <th scope="col">Nhận xét</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each auc_list_win}}
+                                        <tr>
+                                            <td>{{STT}}</td>
+                                            <td>{{Name_Pro}}</td>
+                                            <td>{{PRICE}}</td>
+                                            <td>                                       
+                                                <button type="text" data-value="1" class="btn vote"><i class="icon-like"></i></button>
+                                                <button type="text" data-value="-1" class="btn vote"><i class="icon-dislike"></i></button>                                              
+                                            </td>
+                                            <td>
+                                                <p id="showcomment">{{RPORTS}}</p>
+                                                <textarea style="display:none" name="Comment" id="Comment">
+                                                    {{RPORTS}}
+                                                </textarea>
+                                            </td>
+                                            <td>
+                                                <button type="text"  class="btn btn-danger edit" ><i class="fas fa-pencil-alt"></i></button>
+                                                <button type="text" data-userid="{{ID_USER}}" data-sellerid="{{ID_SELLER}}" data-proid="{{ID_PRO}}"  class="btn btn-success save"><i class="fas fa-save"></i></button>   
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="tab-pane " id="seller" role="tabpane7">
+                    <div class="card-body">
+                        <div class="tab-pane " id="seller" role="tabpane7">                          
+                            <div class="card-body">
+                                <form action="/upseller" id="sellerform"method="GET">
+                                    <input type="text" id="ID_User"name="ID_User" value="{{session.user}}" style="display:none" ></input>
+                                     <input type="text" id="Name"name="Name" value="{{session.username}}" style="display:none"></input>
+                                      <input type="text" id="Scored"name="Scored" value="{{scored}}"style="display:none" ></input>
+                                    <button type="submit" class="btn btn-success">Gửi yêu cầu UPSELLER</button>
+                                </form>
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/tab-content-->
+
+    </div>
+    <!--/col-9-->
+</div>
+<!--/row-->
+ <script src="/js/profile.js"></script>
+
+
+
+
+
+
+<!--/tab-pane-->
