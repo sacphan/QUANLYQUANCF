@@ -33,16 +33,15 @@ function getAdddata(url, modalID) {
 // catch event add quick in view
 function addQuick(element, url, tbodyID) {
     let modalID = $(element).attr('data-target').slice(1);
-
+    let jqueryModalId = "#" + modalID;
     // blockUI
     blockUI();
     $.when( ajaxRequest(url,'','GET') )
         .then( data =>{
             // render modal
-            $(`#${modalID}`).html(data.modal);
+            $(jqueryModalId).html(data.modal);
             // add action to post add request
-
-            $(`#${modalID} a[name="modal-action"]`).attr('onclick', 'modifyAdd(\'' + url + '\',\'' + modalID +'\',\'' + tbodyID +'\')');
+            $('#' + modalID+ ' a[name="modal-action"]').attr('onclick', 'modifyAdd(\'' + url + '\',\'' + modalID +'\',\'' + tbodyID +'\')');
             // unblockUI
             $.unblockUI();
         })
@@ -58,9 +57,9 @@ function addQuick(element, url, tbodyID) {
 function modifyAdd(url, modalID, tbodyID) {
     // get request data
     let addData = getAdddata(url,modalID);
-
     $.when(ajaxRequest(addData.url, addData.data))
         .then(res =>{
+            console.log(res)
             clearAlert(modalID);
             // status = -1 => modify setting refused
             // status = 0 => modify setting fail
@@ -70,14 +69,14 @@ function modifyAdd(url, modalID, tbodyID) {
             }
             else if (res.status === 1){
                 // close modal
-                offModal(modalID);
+                //offModal(modalID);
                 // add row into beginning of the table
                 $(`#${tbodyID} tr:first`).before(res.data);
 
                 // toastr success
                 toastr.success(`${res.message.toLowerCase()}`, `${res.title}`, {timeOut: "500"});
             }else{
-                console.log('sql error');
+                console.log(res.message);
                 /////
             }
         })
@@ -141,14 +140,16 @@ function fillModal(modalID, data) {
 //////////////
 function editSingle(element, url, tbodyID) {
     let modalID = $(element).attr('data-target').slice(1);
-
+    let mId = $(element).attr('data-id');
+    let data = {id:mId}
     // blockUI
     blockUI();
     // get element data & fill in the modal
-    $.when(ajaxRequest(url, '', 'GET'))
+    $.when(ajaxRequest(url, data, 'GET'))
         .then( data =>{
+            console.log(data)
             // render modal
-            $(`#${modalID}`).html(data.data);
+            $(`#${modalID}`).html(data.modal);
 
             // // fill in modal
             // fillModal(modalID,data.data);
@@ -190,12 +191,10 @@ function switchCheckbox(element, url) {
 
 // /////////////////////
 // // Delete handling
-var data;
-//chap nhan
-function accept() {
-    showConfirmModal(2)
-    sendDataByAjax(data,'POST')
-}
+
+// flag = 1: delete one object
+// flag = all: delete multiply object
+
 //lay du lieu 1 dong
 function getOneObj(element) {
     showConfirmModal(1)
@@ -204,27 +203,46 @@ function getOneObj(element) {
     var dataFlag = $(element).attr("data-flag")
     var idArr = []
     idArr.push(dataId)
-    data = {idArr:idArr,url:dataUrl,flag:dataFlag};
+    var dataDelete = {idArr:idArr,flag:dataFlag};
+    $('#modal_btn_yes').data('datadelete',dataDelete)
+    $('#modal_btn_yes').data("url",dataUrl)
 }
+
 //lay du lieu nhieu dong
 function getAllObj(element) {
     showConfirmModal(1)
     var dataUrl = $(element).attr("data-url")
     var dataFlag = $(element).attr("data-flag")
     var idArr = getRowCheck();
-    data = {idArr:idArr,url:dataUrl,flag:dataFlag};
+    var sizeIdArr = idArr.length;
+    $('#countdelete').html('(' + sizeIdArr + ')');
+    var dataDelete = {idArr:idArr,flag:dataFlag};
+    $('#modal_btn_yes').data("datadelete",dataDelete)
+    $('#modal_btn_yes').data("url",dataUrl)
 }
-//gui du lieu thong qua ajax
-function sendDataByAjax(data,method)
+
+//accept modal
+function accept() {
+    var url = $('#modal_btn_yes').data("url")
+    var dataDelete = $('#modal_btn_yes').data("datadelete")
+    showConfirmModal(2)
+    callAjax(url,dataDelete,'POST')
+}
+
+//reject modal
+function reject() {
+    $('#modalConfirm').modal('hide');
+}
+
+//call ajax
+function callAjax(url,data='',method="POST")
 {
-    $.when(ajaxRequest(data['url'], data, method))
+    $.when(ajaxRequest(url, data, method))
         .then(data =>{
-            console.log(data);
+            console.log(data)
             if(data['status'])
             {
                 deleteRow(data['data']);
-                console.log('IE co bug nha microsoft?');
-                f();
                 showConfirmModal(3,data['message']);
             }
             else
@@ -236,32 +254,21 @@ function sendDataByAjax(data,method)
             console.log(err);
         });
 }
-//tu choi modal
-function reject() {
-    $('#modalConfirm').modal('hide');
-}
-//delete html
-function deleteRow(arr)
-{
-    for(var id of arr)
+
+//get list id is checked
+function getRowCheck() {
+    var arr = []
+    jQuery("input[name='checkrow']").each(function ()
     {
-        document.getElementById('row_' + id).remove()
-    }
-}
-//check all box
-function checkAll()
-{
-    var value = $('#check_all').is(':checked');
-    jQuery("input[name='checkbox']").each(function () {
-        $(this).prop( "checked", value );
+        if (this.checked == true)
+        {
+            arr.push(this.value)
+        }
     })
+    return arr;
 }
-function hideWarningModal() {
-    $('#modalConfirm').modal('hide')
-}
-function showWarningModal() {
-    $('#modalConfirm').modal('show')
-}
+
+//show modal
 function showConfirmModal(index,data=null) {
     switch (index) {
         case 1:
@@ -290,72 +297,116 @@ function showConfirmModal(index,data=null) {
             break;
     }
 }
-function f() {
-    var isIE = window.ActiveXObject || "ActiveXObject" in window;
-    if (isIE) {
-        $('.modal').removeClass('fade');
+
+//delete html
+function deleteRow(arr)
+{
+    if(arr !== null) {
+        for (var id of arr) {
+            document.getElementById('row_' + id).remove()
+        }
     }
 }
-// xuat file pdf
+//check all checkbox
+function checkAll(element)
+{
+    var value = $(element).is(':checked');
+    jQuery("input[name='checkrow']").each(function () {
+        $(this).prop( "checked", value );
+    })
+}
+
+//hide warning modal
+function hideWarningModal() {
+    $('#modalConfirm').modal('hide')
+}
+
+//show warning modal
+function showWarningModal() {
+    $('#modalConfirm').modal('show')
+}
+
+// xuat file excel
 function exportExcel(element) {
-    var type = $(element).attr('data-type')
-    var flag = $(element).attr('data-flag')
-    var rowArr = getRowCheck()
-    var dataUrl = $(element).attr('data-url')
+    var idArr = getRowCheck()
+    var url = $(element).attr('data-url')
     showExportCheck()
     var attrArr = getExportAttrCheck()
     if(attrArr.length>0)
     {
-        if(rowArr.length>0)
-            data = data = {attrArr:attrArr,rowArr:rowArr,url:dataUrl,type:type,flag:flag};
-    }
-    console.log(data)
-    if(!(typeof data === 'undefined')) {
-        sendDataByAjax(data, 'POST')
+        if(idArr.length>0) {
+            //data = data = {attrArr: attrArr, rowArr: rowArr, url: dataUrl, type: type, flag: flag};
+            data={type:'excel',attrArr:attrArr,idArr:idArr}
+            window.location.href = createUrlGetRequest(url,data)
+            hideExportCheck()
+        }
     }
 }
 
-function exportPdf() {
+//xuat file pdf
+function exportPdf(element) {
+    var url = $(element).attr('data-url')
+    var idArr = getRowCheck();
+    showExportCheck()
+    var attrArr = getExportAttrCheck()
 
+    if(attrArr.length>0)
+    {
+        if (idArr.length > 0)
+        {
+            data={type:'pdf',attrArr:attrArr,idArr:idArr}
+            window.location.href = createUrlGetRequest(url, data)
+            hideExportCheck()
+        }
+    }
 }
+
+//tao url de thuc hien export request
+function createUrlGetRequest(url,data) {
+    var result =url+'?'
+    var keys = Object.keys(data)
+    var value = Object.values(data)
+    for(var i=0;i<keys.length;i++)
+    {
+        if(Array.isArray(value[i]))
+        {
+            value[i].forEach(element => result = result + keys[i] + '[]' + '=' + element + '&')
+        }
+        else
+        {
+            result = result + keys[i] + '='
+            result = result + value[i] + '&'
+        }
+    }
+    return result
+}
+
 //lay cac truong thuoc tinh duoc check
 function getExportAttrCheck() {
     var listAttrExport = []
-    jQuery("input[name='checkExport']").each(function () {
-        if(this.checked) {
+    jQuery("input[name='checkcolumn']").each(function () {
+        if($(this).is(':checked')) {
             var value = $(this).attr('data-attr')
             listAttrExport.push(value)
         }
     })
+    //console.log(listAttrExport)
     return listAttrExport
 }
 function showExportCheck() {
-    jQuery("input[name='checkExport']").each(function () {
+    jQuery("input[name='checkcolumn']").each(function () {
         $(this).removeAttr('hidden')
     })
 }
 function hideExportCheck() {
-    jQuery("input[name='checkExport']").each(function () {
+    jQuery("input[name='checkcolumn']").each(function () {
         $(this).attr('hidden', 'true')
+        $(this).prop('checked',false)
     })
 }
 
-function getRowCheck() {
-    var arr = []
-    jQuery("input[name='checkbox']").each(function ()
-    {
-        if (this.checked == true)
-        {
-            arr.push(this.value)
-        }
-    })
-    return arr;
-}
 
-function loadThmbImage(path)
-{
 
-}
 
 
 
