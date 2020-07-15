@@ -16,7 +16,6 @@
     "express-handlebars": "^4.0.4",
     "express-session": "^1.17.1",
 <<<<<<< Updated upstream
-=======
     "handlebars": "^4.7.6",
 >>>>>>> Stashed changes
     "hbs": "^4.1.1",
