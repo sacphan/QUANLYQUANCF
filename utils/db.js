@@ -62,11 +62,7 @@ exports.update=(tbName,idField,entity)=>
                 reject(err);
             }
         });
-<<<<<<< Updated upstream
-        console.log(entity);
-=======
        
->>>>>>> Stashed changes
         const id=entity[idField];
         delete entity[idField];
         

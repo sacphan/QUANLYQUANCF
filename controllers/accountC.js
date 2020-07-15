@@ -2,11 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const accountM = require("../models/AccountsM");
-<<<<<<< Updated upstream
-
-=======
 var dateFormat = require('dateformat');
->>>>>>> Stashed changes
 // router.use(passport.initialize());
 // router.use(passport.session());
 // router.use(require('../config/passport')(passport));
@@ -26,11 +22,7 @@ router.get("/login", function(req, res) {
 router.post('/login', async(req, res) => {
         const username = req.body.username;
         const password = req.body.password;
-<<<<<<< Updated upstream
-        
-=======
      
->>>>>>> Stashed changes
         const user = await accountM.getByUsername(username);
         if (user === null) {
             res.render('account/login', { error: 'Username không tồn tại!', layout: false });
@@ -38,11 +30,7 @@ router.post('/login', async(req, res) => {
         }
         bcrypt.compare(password, user.Password, function(err, result) {
             if (result == true) {
-<<<<<<< Updated upstream
-                console.log(user)
-=======
                
->>>>>>> Stashed changes
                 req.session.user = user.Id;
                 req.session.email = user.Email;
                 req.session.username = user.UserName;
@@ -68,22 +56,14 @@ router.post('/login', async(req, res) => {
 router.post('/createAccount', async(req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-<<<<<<< Updated upstream
-  
-=======
     
->>>>>>> Stashed changes
     bcrypt.hash(password, bcrypt.genSaltSync(10),async function(err, hash) {
         
         var user = {
             Id: null,
             FullName: req.body.name,
             Email: req.body.email,
-<<<<<<< Updated upstream
-            BirthDay: req.body.DOB,
-=======
             BirthDay: dateFormat(new Date(req.body.DOB), "yyyy-mm-dd"),
->>>>>>> Stashed changes
             Address:req.body.address,
             Phone:req.body.phone,
             UserName:username,
@@ -96,15 +76,12 @@ router.post('/createAccount', async(req, res) => {
             res.render('account/createAccount', { error: "Email đã tồn tại", layout: false, user: user });
             return false;
         }
-<<<<<<< Updated upstream
-=======
         const checkusername = await accountM.getByUsername(req.body.username);
         if (checkusername != null) {
     
             res.render('account/createAccount', { error: "UserName đã tồn tại", layout: false, user: user });
             return false;
         }
->>>>>>> Stashed changes
     
         const uId = await accountM.add(user);
     
@@ -125,20 +102,6 @@ router.get('/profile', async(req, res) => {
         return false;
     }
     
-<<<<<<< Updated upstream
-        let profile = await accountM.getByEmail(req.session.email);
-        let listevaluate=await evaluateM.getbyUserID(req.session.user);
-        let auc_list_win =await  auc_list_winM.getbyUserID(req.session.user);
-        res.render('account/profile', {
-            listevaluate:listevaluate,
-            auctionlist:auctionlist,
-            watchlist:watchlist, 
-            profile: profile, 
-            session: req.session, 
-            cats: cats,
-            scored:profile.Scored_Report,
-            auc_list_win:auc_list_win
-=======
         let profile = await accountM.getByUsername(req.session.username);
        
         profile.BirthDay = dateFormat(new Date(profile.BirthDay), "yyyy-mm-dd");
@@ -147,7 +110,6 @@ router.get('/profile', async(req, res) => {
             profile: profile, 
             session: req.session, 
            
->>>>>>> Stashed changes
          });
         return true;
 })
@@ -159,15 +121,6 @@ router.post('/profile/info', async(req, res) => {
     const Name=req.body.first_name;
     const Phone=req.body.phone;
     const Email=req.body.email;
-<<<<<<< Updated upstream
-    let DOB=req.body.DOB;
-    const user={
-        f_ID:req.session.user,
-        f_Name:Name,
-        Phone:Phone,
-        f_Email:Email,
-        f_DOB:DOB
-=======
     let DOB=dateFormat(new Date(req.body.DOB), "yyyy-mm-dd");
     const user={
         Id:req.session.user,
@@ -175,7 +128,6 @@ router.post('/profile/info', async(req, res) => {
         Phone:Phone,
         Email:Email,
         BirthDay:DOB
->>>>>>> Stashed changes
     }
     const resultinfo=await accountM.update(user);
     res.redirect("/account/profile");
@@ -188,23 +140,6 @@ router.post('/profile/changepassword', async(req, res) => {
     const password = req.body.password;
     const newpassword = req.body.newpassword;
     const confirmnewpassword = req.body.confirmnewpassword;
-<<<<<<< Updated upstream
-    let profile = await accountM.getByEmail(req.session.email);
-    if (newpassword!=confirmnewpassword)
-    {
-    
-        res.render('account/profile', {auctionlist: auctionlist,watchlist:watchlist, profile: profile, session: req.session, cats: cats,error:"Mật khẩu xác nhận không đúng" });
-        return false;
-    }
-    bcrypt.compare(password, profile.f_Password,  async(err, result)=> {
-        if (result == true) {
-            
-            bcrypt.hash(newpassword, bcrypt.genSaltSync(10), async(err, hash)=> {
-
-                user = {
-                    f_ID: req.session.user,                  
-                    f_Password: hash,                 
-=======
     let profile = await accountM.getByUsername(req.session.username);
     if (newpassword!=confirmnewpassword)
     {
@@ -220,27 +155,18 @@ router.post('/profile/changepassword', async(req, res) => {
                 user = {
                     Id: req.session.user,                  
                     Password: hash,                 
->>>>>>> Stashed changes
                 };
                 const update = await accountM.update(user);
                 if (update)
                 {
-<<<<<<< Updated upstream
-                    res.render('account/profile', {auctionlist:auctionlist,watchlist:watchlist,profile: profile, session: req.session, cats: cats, success: 'Mật khẩu đổi thành công!' });
-=======
                     res.render('account/profile', {profile: profile, session: req.sessions, success: 'Mật khẩu đổi thành công!' });
->>>>>>> Stashed changes
                     return true;
                 } 
                 else return false;
             });
            
         } else {
-<<<<<<< Updated upstream
-            res.render('account/profile', { watchlist:watchlist,profile: profile, session: req.session, cats: cats,error: 'Mật khẩu hiện tại không đúng!' });
-=======
             res.render('account/profile', { profile: profile, session: req.session,error: 'Mật khẩu hiện tại không đúng!' });
->>>>>>> Stashed changes
             return false;
         }
 
