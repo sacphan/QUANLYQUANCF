@@ -5,7 +5,12 @@ const mysql = require("mysql");
 
 module.exports = {
     all: async() => {
+<<<<<<< Updated upstream
         const sql = `SELECT * FROM ${tbName}`;
+=======
+        const sql = `SELECT * FROM ${tbName}`;   
+     
+>>>>>>> Stashed changes
         const rows = await db.load(sql);
         return rows;
     },

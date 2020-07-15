@@ -11,9 +11,14 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "dateformat": "^3.0.3",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
     "express-session": "^1.17.1",
+<<<<<<< Updated upstream
+=======
+    "handlebars": "^4.7.6",
+>>>>>>> Stashed changes
     "hbs": "^4.1.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",

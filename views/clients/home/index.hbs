@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-12">
+
+        <!-- Row -->
+        <div class="row">
+            <!-- column -->
+            {{#each listTables}}
+            <div class="col-lg-3 col-md-6">
+                <!-- Card -->
+                <div class="card">
+                   <img class="card-img-top img-responsive" src="Images/table.jpg"/>
+                    <div class="card-body">
+                        <h4 class="card-title">{{Name}}</h4>
+                        
+                        <h4>Khu vực: {{Area}}</h4>
+                        {{#iff Status '==' 0}}
+                            <h6>Trạng thái: Còn trống</h6> 
+                            <a href="#" class="btn btn-primary">Mở bàn</a> 
+                        {{else}}
+                            <h6>Trạng thái: Có khách</h6> 
+                            <a href="#" class="btn btn-warning">Thanh toán</a>
+                        {{/iff}}
+
+                         
+                                                                
+                    </div>
+                </div>
+                <!-- Card -->
+            </div>
+            <!-- column -->
+            <!-- column -->
+            {{/each}}
+        </div>
+        <!-- Row -->
+    </div>
+</div>
