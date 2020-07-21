@@ -51,6 +51,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.use("/account", require("./controllers/accountC"));
+app.use("/", require("./controllers/SaleC"));
 
 app.get('/', async(req, res) => {
     
