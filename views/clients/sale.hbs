@@ -1,2 +1,211 @@
-<div class="col-left">123</div>
-<div class="col-right">s232</div>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<style>
+    /* external css: flickity.css */
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: sans-serif;
+    }
+
+    .carousel {
+        background: #EEE;
+    }
+
+    .carousel-cell {
+        width: 28%;
+        height: 200px;
+        margin-right: 10px;
+        background: #8C8;
+        border-radius: 5px;
+        counter-increment: carousel-cell;
+        background-image: url("/Images/products/product.png");
+    }
+
+    .carousel-cell.is-selected {
+        background-image: url("/Images/products/product.png");
+    }
+
+    /* cell number */
+    .carousel-cell:before {
+        display: block;
+        text-align: center;
+
+        line-height: 200px;
+        font-size: 80px;
+        color: white;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-4 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="UserSale ">
+                    <i title="Người bán" class="fas fa-user-circle"></i>
+                    <span>Phan Chí Sắc</span>
+                </div>
+                </br>
+                <div class="Customer">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon2">
+                                <i class="ti-search"></i>
+                            </span>
+                            <input type="text" class="form-control" id="exampleInputuname2"
+                                placeholder="Tìm kiếm tên khách hàng">
+                            <button class="btn" data-toggle="tooltip" title="Thêm khách hàng">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs customtab" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span
+                                class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Hóa
+                                đơn</span></a> </li>
+                    <!--   <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span
+                            class="hidden-sm-up"><i class="ti-user"></i></span> <span
+                            class="hidden-xs-down">Profile</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span
+                            class="hidden-sm-up"><i class="ti-email"></i></span> <span
+                            class="hidden-xs-down">Messages</span></a> </li>-->
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home2" role="tabpanel">
+                        </br>
+                        <form action="#">
+                            <div class="form-group row">
+                                <div class="form-label control-label col-lg-8">Tổng tiền hàng
+                                    <span class="badge">1</span>
+                                    <!---->
+                                </div>
+                                <div class="form-output form-control-static col-lg-4">15,000</div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="form-label control-label col-lg-8">Giảm giá </label>
+                                <div class="form-output col-lg-4">
+                                    <div class="popup-anchor">
+                                        <input class="form-control" value="0" required>
+                                        </input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-label control-label col-lg-8">Khách cần trả
+                                </div>
+                                <div class="form-output form-control-static col-lg-4">15,000</div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="form-label control-label col-lg-8">Khách thanh toán </label>
+                                <div class="form-output col-lg-4">
+                                    <div class="popup-anchor">
+                                        <input class="form-control" value="" required>
+                                        </input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-label control-label col-lg-8">Tiền thừa khách trả
+                                </div>
+                                <div class="form-output form-control-static col-lg-4">15,000</div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="ti-pencil"></i>
+                                        </span>
+                                    </div>
+                                    <textarea class="form-control" placeholder="Ghi chú" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <button type="submit" class="btn btn-primary col-lg-12">Thanh toán</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body" id="cardOrder">
+                <div class="md-form active-pink active-pink-2 mb-3 mt-0">
+  <input class="form-control" type="text" placeholder="Tìm mặt hàng" aria-label="Search">
+</div>
+                <ul class="nav nav-tabs customtab2" id="tablistorder" role="tablist">
+                    <li class="nav-item navorder"> <a class="nav-link active navlinkorder" data-toggle="tab" href="#hd1" role="tab"
+                            aria-selected="false"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span
+                                class="hidden-xs-down">Hóa đơn 1</span></a> </li>
+                                  
+                </ul>
+                <div class="tab-content" id="tablcontentOrder">
+                    <div class="tab-pane active" id="hd1" role="tabpanel">
+                        <div class="p-3">
+                         <table class="table">
+  <thead>
+    <tr>
+ 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!-- Flickity HTML init -->
+                <h4>Chọn mặt hàng</h4>
+                <div class="carousel" data-flickity='{ "groupCells": true }'>
+                    <div class="carousel-cell" style="color: #3d933c;">
+                            <p>cà phê 15000 </p>
+                    </div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                    <div class="carousel-cell"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
