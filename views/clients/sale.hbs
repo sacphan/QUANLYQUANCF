@@ -64,7 +64,7 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs customtab" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span
+                    <li class="nav-item"> <a class="nav-link active " data-toggle="tab" href="#home2" role="tab"><span
                                 class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Hóa
                                 đơn</span></a> </li>
                     <!--   <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span
@@ -76,21 +76,21 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane active" id="home2" role="tabpanel">
+                    <div class="tab-pane active " id="home2" role="tabpanel">
                         </br>
                         <form action="#">
                             <div class="form-group row">
                                 <div class="form-label control-label col-lg-8">Tổng tiền hàng
-                                    <span class="badge">1</span>
+                                    <span class="badge" id="totalquality">0</span>
                                     <!---->
                                 </div>
-                                <div class="form-output form-control-static col-lg-4">15,000</div>
+                                <div class="form-output form-control-static col-lg-4" id="totalprice">0</div>
                             </div>
                             <div class="form-group row">
                                 <label class="form-label control-label col-lg-8">Giảm giá </label>
                                 <div class="form-output col-lg-4">
                                     <div class="popup-anchor">
-                                        <input class="form-control" value="0" required>
+                                        <input class="form-control"id = "discout" value="0" required>
                                         </input>
                                     </div>
                                 </div>
@@ -98,21 +98,21 @@
                             <div class="form-group row">
                                 <div class="form-label control-label col-lg-8">Khách cần trả
                                 </div>
-                                <div class="form-output form-control-static col-lg-4">15,000</div>
+                                <div class="form-output form-control-static col-lg-4" id="totalresult">0</div>
                             </div>
                             <div class="form-group row">
-                                <label class="form-label control-label col-lg-8">Khách thanh toán </label>
+                                <label class="form-label control-label col-lg-8">Tiền khách đưa </label>
                                 <div class="form-output col-lg-4">
                                     <div class="popup-anchor">
-                                        <input class="form-control" value="" required>
+                                        <input class="form-control" value="" id="givenprice" required>
                                         </input>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="form-label control-label col-lg-8">Tiền thừa khách trả
+                                <div class="form-label control-label col-lg-8">Tiền thừa trả khách
                                 </div>
-                                <div class="form-output form-control-static col-lg-4">15,000</div>
+                                <div class="form-output form-control-static col-lg-4" id = "returnedprice">0</div>
                             </div>
 
                             <div class="form-group">
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <button type="submit" class="btn btn-primary col-lg-12">Thanh toán</button>
+                                <button type="button" id="payorder" class="btn btn-primary col-lg-12">Thanh toán</button>
                             </div>
                         </form>
                     </div>
@@ -142,64 +142,41 @@
         <div class="card">
             <div class="card-body" id="cardOrder">
                 <div class="md-form active-pink active-pink-2 mb-3 mt-0">
-  <input class="form-control" type="text" placeholder="Tìm mặt hàng" aria-label="Search">
-</div>
+                    <input class="form-control" type="text" placeholder="Tìm mặt hàng" aria-label="Search">
+                </div>
                 <ul class="nav nav-tabs customtab2" id="tablistorder" role="tablist">
-                    <li class="nav-item navorder"> <a class="nav-link active navlinkorder" data-toggle="tab" href="#hd1" role="tab"
-                            aria-selected="false"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span
-                                class="hidden-xs-down">Hóa đơn 1</span></a> </li>
-                                  
+                    <li class="nav-item navorder "> <a data-discout="0" onclick="changeorder(hd1,this)"class="taborder nav-link active navlinkorder " data-toggle="tab" href="#hd1"
+                            role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-home"></i></span>
+                            <span class="hidden-xs-down">Hóa đơn 1</span></a> </li>
+
                 </ul>
                 <div class="tab-content" id="tablcontentOrder">
-                    <div class="tab-pane active" id="hd1" role="tabpanel">
-                        <div class="p-3">
-                         <table class="table">
-  <thead>
-    <tr>
- 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-                        </div>
+                    <div class="tab-pane active taborder" id="hd1" role="tabpanel">
+                        
+                            <table class="table">
+                                <thead>
+                                  
+                                </thead>
+                                <tbody>
+                                  
+                                </tbody>
+                            </table>
+                      
                     </div>
-                   
+
                 </div>
                 <!-- Flickity HTML init -->
                 <h4>Chọn mặt hàng</h4>
                 <div class="carousel" data-flickity='{ "groupCells": true }'>
+                    {{#each liststocks}}
                     <div class="carousel-cell" style="color: #3d933c;">
-                            <p>cà phê 15000 </p>
+                        <p>{{Name}}</p>
+                        <p>{{PriceOut}} </p>
+                        <p style="display:none">{{Id}}</p>
+                        <p style="display:none">{{code}}</p>
                     </div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
-                    <div class="carousel-cell"></div>
+                    {{/each}}
+
                 </div>
 
             </div>
@@ -207,5 +184,6 @@
     </div>
 
 </div>
-</div>
+
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="/js/sale.js"></script>
