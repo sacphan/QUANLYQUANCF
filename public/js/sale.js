@@ -98,28 +98,38 @@ function resetpaymenu()
     $("#totalquality").text("0");
     $("#totalprice").text("0");
     $("#totalresult").text("0");
+    $("#givenprice").val("0")
+    $("#returnedprice").text("0");
 }
 
 function changeorder(tab,e) {
    
-   var discout = parseInt($(e).attr("data-discout"));
-  
-    resetpaymenu();
-   var id = $(tab).attr("id");
-   var listchildren = $(`#${id} tbody tr`);
-   
-   
-       var totalquality = sumjq($(`#${id} tbody tr .quality`));
-        totalprice = sumjq($(`#${id} tbody tr .total`));
-
-        $("#discout").val(discout);
-        $("#totalquality").text(totalquality);
-        $("#totalprice").text(totalprice);
-        $("#totalresult").text(totalprice-discout);
-       
-   
+   var discout = parseInt($(e).attr("data-discout")); 
+   resetpaymenu();
+   var id = $(tab).attr("id");   
+    var totalquality = sumjq($(`#${id} tbody tr .quality`));
+    totalprice = sumjq($(`#${id} tbody tr .total`));
+    $("#discout").val(discout);
+    $("#totalquality").text(totalquality);
+    $("#totalprice").text(totalprice);
+    $("#totalresult").text(totalprice-discout); 
 }
 
 $("#payorder").click(function(){
+    let current_datetime = new Date();
+    let formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear()
+        $("#titledate").text(`${formatted_date}`);
+        $("#date").text(`Ngày ${current_datetime.getDate()} tháng ${current_datetime.getMonth() + 1} năm ${current_datetime.getFullYear()}`)
+        $("#address").after($(".tab-pane.active.taborder").html());
+        $("#printtotal").text($("#totalprice").text());
+        $("#printck").text($("#discout").val());
+        $("#printresult").text($("#totalresult").text());
+       
+        $("#printorder").printThis({
+            importCSS: true,
+            importStyle: true,
+            loadCSS: "/css/print_rules_sale.css"
+            });
+        });
+     
 
-})
