@@ -1,11 +1,8 @@
-#printorder
-{
-    display: block ;
-}
+
 @media print 
 {
     #printorder
-    {
-        display: none ;
-    }
+{
+    display: block ;
+}
 }

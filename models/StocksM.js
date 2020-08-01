@@ -41,5 +41,11 @@ module.exports = {
         const totalP=rs.length;
         const pageTotal=Math.floor(totalP/6)-1;
         return pageTotal;
+    },
+    searchbyName:async(Name) => 
+    {
+        let sql=`SELECT * FROM ${tbName} Where Name like "%${Name}%"`;
+        const rows = await db.load(sql); 
+        return rows; 
     }
 }

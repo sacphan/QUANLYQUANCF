@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require("express-session");
 const tableM = require("./models/TablesM");
 const Handlebars=require("handlebars"); 
+
 port = 4444,
 app = express();
 //config express handlebar
@@ -52,7 +53,9 @@ app.use(express.static(__dirname + '/public'));
 
 app.use("/account", require("./controllers/accountC"));
 app.use("/", require("./controllers/SaleC"));
-
+app.use("/", require("./controllers/OrderC"));
+app.use("/stock", require("./controllers/StockC"));
+app.use("/customer", require("./controllers/CustomerC"));
 app.get('/', async(req, res) => {
     
   
@@ -61,8 +64,7 @@ app.get('/', async(req, res) => {
        
         res.render('admin/home/index',
         {
-            layout:"layoutadmin.hbs",
-            
+            layout:"layoutadmin.hbs"          
         });
     }
     else
