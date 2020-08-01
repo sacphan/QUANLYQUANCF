@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <style>
     /* external css: flickity.css */
 
@@ -44,7 +45,7 @@
             <div class="card-body">
                 <div class="UserSale ">
                     <i title="Người bán" class="fas fa-user-circle"></i>
-                    <span>Phan Chí Sắc</span>
+                    <span>{{session.username}}</span>
                 </div>
                 </br>
                 <div class="Customer">
@@ -53,12 +54,19 @@
                             <span class="input-group-text" id="basic-addon2">
                                 <i class="ti-search"></i>
                             </span>
-                            <input type="text" class="form-control" id="exampleInputuname2"
+                            <input type="text" class="form-control" id="searchCustomer"
                                 placeholder="Tìm kiếm tên khách hàng">
                             <button class="btn" data-toggle="tooltip" title="Thêm khách hàng">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
+                        <div class="row">
+                             <div class="col-lg-2"></div>
+                            <ul class="list-group customer-group col-lg-8" style="z-index: 1000; position: absolute;">
+                            
+                            </ul>
+                        </div>
+                       
                     </div>
                 </div>
 
@@ -78,7 +86,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active " id="home2" role="tabpanel">
                         </br>
-                        <form action="#">
+                        <form action="#" id="formorder">
                             <div class="form-group row">
                                 <div class="form-label control-label col-lg-8">Tổng tiền hàng
                                     <span class="badge" id="totalquality">0</span>
@@ -90,7 +98,7 @@
                                 <label class="form-label control-label col-lg-8">Giảm giá </label>
                                 <div class="form-output col-lg-4">
                                     <div class="popup-anchor">
-                                        <input class="form-control"id = "discout" value="0" required>
+                                        <input class="form-control" id="discout" value="0" required>
                                         </input>
                                     </div>
                                 </div>
@@ -112,7 +120,7 @@
                             <div class="form-group row">
                                 <div class="form-label control-label col-lg-8">Tiền thừa trả khách
                                 </div>
-                                <div class="form-output form-control-static col-lg-4" id = "returnedprice">0</div>
+                                <div class="form-output form-control-static col-lg-4" id="returnedprice">0</div>
                             </div>
 
                             <div class="form-group">
@@ -123,11 +131,15 @@
                                             <i class="ti-pencil"></i>
                                         </span>
                                     </div>
-                                    <textarea class="form-control" placeholder="Ghi chú" rows="1"></textarea>
+                                    <textarea class="form-control" id="note" placeholder="Ghi chú" rows="1"></textarea>
                                 </div>
                             </div>
+                            <div class="alert alert-danger hide" id="alerterror" role="alert">
+                                 
+                            </div>
                             <div class="form-group row">
-                                <button type="button" id="payorder" class="btn btn-primary col-lg-12">Thanh toán</button>
+                                <button type="button" id="payorder" data-id="hd1"
+                                    class="btn btn-primary col-lg-12">Thanh toán</button>
                             </div>
                         </form>
                     </div>
@@ -141,32 +153,37 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body" id="cardOrder">
-                <div class="md-form active-pink active-pink-2 mb-3 mt-0">
-                    <input class="form-control" type="text" placeholder="Tìm mặt hàng" aria-label="Search">
+                <div class="md-form active-pink active-pink-2 mb-3 mt-0" >
+                    <input class="form-control" type="text" id="search-stock"placeholder="Tìm mặt hàng" aria-label="Search">
+                    <ul class="list-group stock-group col-lg-8" style="z-index: 1000; position: absolute;">
+                  
+                </ul>
                 </div>
+                
                 <ul class="nav nav-tabs customtab2" id="tablistorder" role="tablist">
-                    <li class="nav-item navorder "> <a data-discout="0" onclick="changeorder(hd1,this)"class="taborder nav-link active navlinkorder " data-toggle="tab" href="#hd1"
-                            role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-home"></i></span>
+                    <li class="nav-item navorder "> <a data-discout="0" onclick="changeorder(hd1,this)"
+                            class="taborder nav-link active navlinkorder " data-toggle="tab" href="#hd1" role="tab"
+                            aria-selected="false"><span class="hidden-sm-up"><i class="ti-home"></i></span>
                             <span class="hidden-xs-down">Hóa đơn 1</span></a> </li>
 
                 </ul>
                 <div class="tab-content" id="tablcontentOrder">
                     <div class="tab-pane active taborder" id="hd1" role="tabpanel">
-                        
-                            <table class="table">
-                                <thead>
-                                  <th>#</th>
-                                  <th></th>
-                                  <th>Tên</th>
-                                  <th>Số lượng</th>
-                                  <th>Đơn giá</th>
-                                  <th>Thành tiền</th>
-                                </thead>
-                                <tbody>
-                                  
-                                </tbody>
-                            </table>
-                      
+
+                        <table class="table">
+                            <thead>
+                                <th>#</th>
+                                <th></th>
+                                <th>Tên</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
                     </div>
 
                 </div>
@@ -189,15 +206,15 @@
     </div>
 
 </div>
-<div class="container"id="printorder" style="display:none">
+<div class="container" id="printorder" style="display:none">
     <div class="row">
         <div class="col-md-4" id="titledate">
 
         </div>
-         <div class="col-md-4" id="title" style="text-align:center;">
-             <h2><b>Hóa đơn bán hàng</b></h2>
-             <h4>Mã hóa đơn: HD0001</h4>
-             <h4 id="date"></h4>
+        <div class="col-md-4" id="title" style="text-align:center;">
+            <h2><b>Hóa đơn bán hàng</b></h2>
+            <h4>Mã hóa đơn: HD0001</h4>
+            <h4 id="date"></h4>
         </div>
     </div>
     <div>
@@ -208,6 +225,8 @@
     </div>
     <div id="address">
         Địa chỉ:
+    </div>
+    <div id="tableorder">
     </div>
     <div class="row">
         <div class="col-md-6"></div>
@@ -225,16 +244,17 @@
         <div class="col-md-3" id="printresult"></div>
     </div>
     </br>
-     <div class="row">
+    <div class="row">
         <div class="col-md-4" id="titledate">
 
         </div>
-         <div class="col-md-4" id="title" style="text-align:center;">
-             <h4><i>Cảm ơn và hẹn gặp lại!</i></h4>
-             
+        <div class="col-md-4" id="title" style="text-align:center;">
+            <h4><i>Cảm ơn và hẹn gặp lại!</i></h4>
+
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script src="/jasonday-printThis-f73ca19/printThis.js"></script>
 <script src="/js/sale.js"></script>

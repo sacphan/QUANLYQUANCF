@@ -39,9 +39,11 @@ exports.add = (tbName, entity) => {
 
 
         const sql = `INSERT INTO ${tbName} SET ?`;
+        
         con.query(sql, entity, (error, results, fields) => {
+            
             if (error) {
-                resole(false);
+               
                 reject(error);               
             }
             if (results)
