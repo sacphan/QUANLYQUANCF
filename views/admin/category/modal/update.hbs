@@ -1,0 +1,30 @@
+<div id="add-quick-modal">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{{title}}}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!--Modal body-->
+        <div class="modal-body center">
+            <div class="row">
+                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">{{{category.name}}}</label>
+                        <input id="name" name="name" type="text" class="form-control ">
+                        <p class="parsley-required text-danger" hidden></p>
+                    </div>
+                </div>
+            </div>
+        </div><!--modal content-->
+
+        <div class="modal-footer">
+            <a href="#" type="button" onclick="clearModal('add-quick-modal')" class="btn btn-secondary" data-dismiss="modal">Đóng</a>
+            <a href="javascript:void(0);" type="submit" name="modal-action" class="btn btn-primary">Lưu</a>
+        </div>
+
+    </div>
+</div>
+</div>
