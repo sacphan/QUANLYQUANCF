@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const Category = require("../../models/admin/Category");
+const exphbs = require("express-handlebars");
 
 
 exports.index = async (req,res,next) =>{
     var category = await Category.all();
-    res.render('admin/category/index',{title: 'Category', categorys: category});
+    res.render('admin/category/index',{title: 'Category', categorys: category,layout:'layoutadmin'});
 };
 
 exports.getAdd = (req,res) =>{
-    res.render('admin/category/modal/add',{title: 'Add Category',layout: false},function(err,html){
+    res.render('admin/category/modal/add',{title: 'Add Category',layout:'layoutadmin'},function(err,html){
         if(err)
             res.json({status: false, modal: null});
         var data = {status: true,modal: html}
@@ -31,7 +32,7 @@ exports.postAdd = async (req,res,next) =>{
         category.id = nId;
         if(nId)
         {
-            res.render('admin/category/ajaxAddrow',{layout:false, category: category},function(err,html){
+            res.render('admin/category/ajaxAddrow',{layout:false, category: category,layout:'layoutadmin'},function(err,html){
                 if(err)
                     res.json({data:null,status:-1,title:'Add Category',message: 'Fail'})
                 else{

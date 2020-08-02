@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const adminRouter = require('./routers/admin')
 const bodyParser = require('body-parser');
 const session = require("express-session");
 const tableM = require("./models/TablesM");
@@ -85,6 +86,10 @@ app.get('/', async(req, res) => {
     }
     
 })
+
+//use admin route
+app.use('/admin', adminRouter);
+
 
 app.listen(port);
 console.log('server running on port 4444');
