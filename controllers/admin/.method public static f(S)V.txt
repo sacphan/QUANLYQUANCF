@@ -1,0 +1,43 @@
+.method public static f(S)V 
+    .limit stack 4
+    .limit locals 5 
+.line 6 iload_0
+    bipush 10
+    if_icmple Label1 
+.line 7 
+    new Rectangle
+    dup
+    iload_0
+    iload_0
+    invokenonvirtual Rectangle/<init>(SS)V
+    astore_2 
+.line 8 
+    aload_2
+    invokevirtual 
+    Rectangle/isFat()Z
+    istore 4 
+.line 9 
+    aload_2
+    astore_3
+    goto Label2 
+    .line 12
+Label1: 
+    new Circle
+    dup
+    iload_0
+    invokenonvirtual 
+    Circle/<init>(I)V
+    astore_1 
+.line 13 
+    aload_1
+    invokevirtual 
+    Circle/isFat()Z
+    istore 4 
+.line 14 
+aload_1
+astore_3 .line 16
+Label2: iload 4
+ifne Label3
+aload_3
+invokeinterface Drawable/draw()V 1 .line 17
+Label3: return .end method
