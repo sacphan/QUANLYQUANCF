@@ -1,208 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    {{>header}}
+   {{> head_admin}}
 </head>
+<body id="cover" class="set-theme theme-body-light">
+<!-- Begin page -->
+    <div id="wrapper">
+        <!-- start: header -->
+        {{> header_admin}}
+         <!-- end: header -->
 
-<body class="fix-header fix-sidebar card-no-border">
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+        <!-- start: sidebar -->
+            {{> nav_admin}}
+         <!-- end: sidebar -->
+
+        <div class="content-page">
+            <div class="content">
+                <div class="container-fluid">
+                    <!--begin content-->
+                        {{{body}}}
+                     <!--end content-->
+
+                     <!-- start: Footer -->
+                        {{> bottom_admin}}
+                     <!-- end: Footer -->
+                </div>
+            </div>    
+        </div>    
+        
+
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        {{>nav}}
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <div class="row page-titles">
-                    <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="text-themecolor mb-0 mt-0">Dashboard</h3>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
-                    </div>
-
-                    <div class="col-md-6 col-4 align-self-center">
-                        <button
-                            class="right-side-toggle waves-effect waves-light btn-info btn-circle btn-sm float-right ml-2"><i
-                                class="ti-settings text-white"></i></button>
-                        <a href="/createproduct" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i>
-                            Đăng tin</a>
-                        <div class="dropdown float-right mr-2 hidden-sm-down">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> January 2019
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> <a class="dropdown-item"
-                                    href="#">February 2019</a> <a class="dropdown-item" href="#">March 2019</a> <a
-                                    class="dropdown-item" href="#">April 2019</a> </div>
+    {{!-- Modal Warning --}}
+    <div id="modalConfirm" class="modal fade confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div id="headmodalconfirm" class="modal-header badge-warning">
+                    <h5 class="modal-title mt-0" id="mySmallModalLabel">Thông báo!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="imagemodalconfirm" class=" text-center">
+                        <div id="warningimage">
+                            <img class=" rounded-circle avatar-xl" src="assets/images/admin/error/warning-icon.png" width="100" alt="200x200"
+                                data-holder-rendered="true">
                         </div>
                     </div>
-
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                {{{body}}}
-                <!-- Row -->
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <div class="right-sidebar">
-                    <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span>
-                        </div>
-                        <div class="r-panel-body">
-                            <ul id="themecolors" class="mt-3">
-                                <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                                <li class="d-block mt-4"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default-dark"
-                                        class="default-dark-theme">7</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a>
-                                </li>
-                                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a>
-                                </li>
-                                <li><a href="javascript:void(0)" data-theme="purple-dark"
-                                        class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna-dark"
-                                        class="megna-dark-theme ">12</a></li>
-                            </ul>
-                            <ul class="mt-3 chatonline">
-                                <li><b>Chat option</b></li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/1.jpg" alt="user-img"
-                                            class="img-circle"> <span>Varun Dhavan <small
-                                                class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/2.jpg" alt="user-img"
-                                            class="img-circle"> <span>Genelia Deshmukh <small
-                                                class="text-warning">Away</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user-img"
-                                            class="img-circle"> <span>Ritesh Deshmukh <small
-                                                class="text-danger">Busy</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user-img"
-                                            class="img-circle"> <span>Arijit Sinh <small
-                                                class="text-muted">Offline</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user-img"
-                                            class="img-circle"> <span>Govinda Star <small
-                                                class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/6.jpg" alt="user-img"
-                                            class="img-circle"> <span>John Abraham<small
-                                                class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/7.jpg" alt="user-img"
-                                            class="img-circle"> <span>Hritik Roshan<small
-                                                class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/8.jpg" alt="user-img"
-                                            class="img-circle"> <span>Pwandeep rajan <small
-                                                class="text-success">online</small></span></a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div id="messagemodalconfirm" class="text-dark text-center">
+                        <p id="warningmessage">
+                            Bạn có chắc chắc muốn xóa <span id="countdelete" style="font-weight: bold;" class="text-danger"></span> dòng  này hay không ?
+                        </p>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-
-            <!-- ============================================================== -->
-            <!-- End Page wrapper  -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-       
-        <div class="swal2-container swal2-center swal2-fade swal2-shown" id="alert1"
-            style="display:none;background: url(&quot;../assets/images/background/nyan-cat.gif&quot;) left center no-repeat rgba(0, 0, 123, 0.4); overflow-y: auto;">
-            <div aria-labelledby="swal2-title" aria-describedby="swal2-content"
-                class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive"
-                aria-modal="true"
-                style="width: 600px; padding: 3em; background: url(&quot;../assets/images/background/active-bg.png&quot;) rgb(255, 255, 255); display: flex;">
-                <div class="swal2-header">
-                    <ul class="swal2-progress-steps" style="display: none;"></ul>
-                    <div class="swal2-icon swal2-error" style="display: none;"><span class="swal2-x-mark"><span
-                                class="swal2-x-mark-line-left"></span><span
-                                class="swal2-x-mark-line-right"></span></span></div>
-                    <div class="swal2-icon swal2-question" style="display: none;"></div>
-                    <div class="swal2-icon swal2-warning" style="display: none;"></div>
-                    <div class="swal2-icon swal2-info" style="display: none;"></div>
-                    <div class="swal2-icon swal2-success" style="display: none;">
-                        <div class="swal2-success-circular-line-left"></div><span class="swal2-success-line-tip"></span>
-                        <span class="swal2-success-line-long"></span>
-                        <div class="swal2-success-ring"></div>
-                        <div class="swal2-success-fix"></div>
-                        <div class="swal2-success-circular-line-right"></div>
-                    </div><img class="swal2-image" style="display: none;">
-                    <h2 class="swal2-title" id="swal2-title" style="display: flex;">Custom width, padding, background.
-                    </h2><button type="button" class="swal2-close" aria-label="Close this dialog"
-                        id="close">×</button>
+                <div id="footermodalconfirm" class="modal-footer">
+                    <button type="button" onclick="accept()" data-datadelete="" data-url="" class="btn btn-success" id="modal_btn_yes">Có</button>
+                    <button type="button" onclick="reject()" class="btn btn-primary" id="modal_btn_no">Không</button>
                 </div>
-                <div class="swal2-content">
-                    <div id="swal2-content" style="display: none;"></div><input class="swal2-input"
-                        style="display: none;"><input type="file" class="swal2-file" style="display: none;">
-                    <div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select
-                        class="swal2-select" style="display: none;"></select>
-                    <div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox"
-                        class="swal2-checkbox" style="display: none;"><input type="checkbox"><span
-                            class="swal2-label"></span></label><textarea class="swal2-textarea"
-                        style="display: none;"></textarea>
-                    <div class="swal2-validation-message" id="swal2-validation-message" style="display: none;"></div>
-                </div>
-                <div class="swal2-actions" style="display: flex;">
-                    <button type="button" id="ok"
-                        class="swal2-confirm swal2-styled" aria-label=""
-                        style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">OK</button>
-                        <button
-                        type="button" class="swal2-cancel swal2-styled" aria-label=""
-                        style="display: none;">Cancel</button></div>
-                <div class="swal2-footer" style="display: none;"></div>
             </div>
         </div>
-         {{>bottom}}
+    </div>
+    {{!-- end Modal Warning --}}
+
+    {{!-- Modal Loading --}}
+    <div id="loadingmodal" class="modal loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div id="loading">
+                        <div class="spinner-grow text-primary m-1" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-secondary m-1" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-success m-1" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-info m-1" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function hideLoadingModal() {
+            $('#loadingmodal').modal('hide')
+        }
+        function showLoadingModal() {
+            //jQuery.noConflict();
+            $('#loadingmodal').modal('show')
+        }
+    </script>
+    {{!-- end Modal Loading --}}
+
+    {{!-- modal Success --}}
+    <div id="successmodal" class="modal fade successModal" tabindex="-1" role="dialog" aria-labelledby="successmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div id="successimage">
+                        <img class=" rounded-circle avatar-xl" src="assets/images/admin/error/success-icon.png" width="200" alt="200x200"
+                            data-holder-rendered="true">
+                    </div>
+                    <div id="messagemodalconfirm" class="text-dark text-center">
+                        <p id="successmessage">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function hideSuccessModal() {
+            $('#successmodal').modal('hide')
+
+        }
+        function showSuccessModal(message) {
+            $('#successmessage').html(message)
+            $('#successmodal').modal('show')
+        }
+    </script>
+    {{!-- end Modal Success --}}
+
+    {{!-- Modal Error --}}
+    <div id="errormodal" class="modal fade errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div id="errorimage">
+                        <img class=" rounded-circle avatar-xl" src="assets/images/admin/error/error-icon.png" width="200" alt="200x200"
+                            data-holder-rendered="true">
+                    </div>
+                    <div id="messagemodalconfirm" class="text-dark text-center">
+                        <p id="errormessage">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function hideErrorModal() {
+            $('#errormodal').modal('hide')
+        }
+        function showErrorModal(message) {
+            $('#errormessage').html(message)
+            $('#errormodal').modal('show')
+        }
+    </script>
+    {{!-- end Modal Error --}}
+
+
+<!-- End page -->
+
+
+    <!-- jQuery  -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/metisMenu.min.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/waves.min.js"></script>
+    <!-- countdown -->
+    <script src="/assets/plugins/admin/countdown/jquery.countdown.min.js"></script>
+    <script src="/assets/pages/countdown.int.js"></script>
+
+    <!-- App js -->
+    <script src="/assets/js/app.js"></script>
+    <!-- Custom js -->
+    <script src="/assets/js/switch-theme.js"></script>
+    <script src="/assets/js/toastr.min.js"></script>
+    <script src="/assets/js/blockUI.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/handle-crud.js"></script>
+    
+    
+    {{!-- script switch mode --}}
+    <script>
+    $(document).ready(function () {
+        // init data to set theme
+        let data = {
+            timeOut: 0,
+            light: 'fa-cloud-sun',
+            dark: 'fa-cloud-moon'
+        }; // init data to set theme
+
+        let isAutoSwitchTheme = $('meta[name="is-switch-theme"]').attr('content') - '0';
+        console.log( isAutoSwitchTheme);
+
+        if (isAutoSwitchTheme){
+            let mins = 60; // Reset when storage is more than 20mins
+            let now = new Date();
+
+            let setupTime = localStorage.getItem('setupTime');
+            if (setupTime == null) {
+                localStorage.setItem('setupTime', now.getTime());
+                // set theme by time
+                setThemeByTime(now.getHours(), data);
+            } else {
+                // data expired, clear localStorage
+                if(now.getTime()-setupTime > mins*60*1000) {
+                    localStorage.clear();
+                    localStorage.setItem('setupTime', now.getTime());
+                    // set theme by time
+                    setThemeByTime(now.getHours(), data);
+                }else{
+                    initTheme(data);
+                }
+            }
+            /// Reset when storage is more than 20mins
+        }else{
+            initTheme(data);
+        }
+    });
+
+</script>
+
 </body>
-
 </html>
