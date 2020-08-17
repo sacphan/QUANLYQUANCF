@@ -1,0 +1,175 @@
+
+<div class="page-title-box">
+        <div class="row align-items-center">
+            <div class="col-sm-6">
+                <h2 class="page-title">PurchaseOrder</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Welcome to Dashboard</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+            <div class="row" style="margin-bottom:20px;">
+                    <div class="col-sm-12 col-md-1">
+                        <div class="dataTables_length" id="example_length">
+                            <select name="example_length" aria-controls="example" class="form-control form-control-sm" id="Top">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-3">
+                        <div class="input-group ">
+                            <input type="text" class="form-control" placeholder="Mã nhập hàng" name="Keyword" id="Keyword">
+                            <div class="input-group-append ">
+                                <button id="SearchKeyword" type="button" class="btn waves-effect waves-light btn-primary" data-toggle="tooltip" title="Tìm kiếm mã nhập hàng">
+                                    <span class="fas fa-search"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-2">
+                        <select class="select form-control" data-select2-id="1" tabindex="-1" aria-hidden="true" id="Status">
+                            <option value="3">@T("All")</option>
+                            <option value="1">@T("Actived")</option>
+                            <option value="0">@T("Lock")</option>
+                        </select>
+                    </div>
+
+               
+
+                    <div class="col-sm-12 col-md-2">
+                        <button id="SearchDate" type="button" class="btn waves-effect waves-light btn-rounded btn-primary" data-toggle="tooltip" title="Tìm kiếm">Tìm kiếm <span class="fas fa-search"></span></button>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <button id="addAgency" class="btn float-right btn-success" data-toggle="modal" data-target="#add-contact" title="Thêm mới"><i class="mdi mdi-plus-circle"></i> Thêm mới</button>
+                    </div>
+                    <!-- Add Contact Popup Model -->
+                   
+                </div>
+                <div class="row">
+ <div class="input-daterange input-group col-md-12" id="date-range">
+                       
+                        <input type="text" class="form-control  " name="start" id="StartDate" value="" placeholder="MM/DD/YYYY">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-info b-0 text-white ">TO</span>
+                        </div>
+                        <input type="text" class="form-control " name="end" id="EndDate" value="" placeholder="MM/DD/YYYY">
+                        </div>
+                    
+</div>
+</br>
+            <table id="myTable" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mã nhập hàng</th>
+                        <th>Thời gian</th>
+                        <th>Nhà cung cấp</th>
+                        <th>Trạng thái</th>
+                        
+                    </tr>
+                </thead>
+                <tbody> 
+                    {{#each PurchaseOrder}}                 
+                            <tr class="tr-list-agency">
+                                <td>{{@index}}</td>
+                                <td class="code">{{Code}}</td>
+                                <td class="createdate">{{CreateDate}}</td>
+                                <td class="supplier">{{Supplier.Name}}</td> 
+                                <td class="status">{{purchaseorderstatus.Name}}</td>                                   
+                                                                                        
+                                
+                            </tr>
+                       {{/each}}
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </div>
+    </div>
+      
+    
+    {{!--
+<script>
+
+    $("#myTable").on('click', '#edit', function () {
+        $("#myModalLabel").text("@T("Agency.Edit")");
+        // get the current row
+        var currentRow = $(this).closest(".tr-list-agency");
+
+        var id = currentRow.find(".id").val();
+        var name = currentRow.find(".name").text();
+        var code = currentRow.find(".code").text();
+        $("#Id").val(id);
+        $("#Name").val(name);
+        $("#Code").val(code);
+
+        var required = document.querySelectorAll("input[required]");
+        required.forEach(function (element) {
+            element.style["border"] = "1px solid #ced4da";
+        });
+        $('#formAgency').valid();
+    });
+
+    function UpdateStatus(id, eAgencyStatus) {
+        var titleMessage, message, textMessage;
+        if (eAgencyStatus === 'Lock') {
+            titleMessage = "@T("Notification.Lock")";
+            message = "Locked";
+            textMessage = "@T("Notification.LockMessage")";
+        }
+        if (eAgencyStatus === 'Active') {
+            titleMessage = "@T("Notification.Unlock")";
+            message = "Unlocked";
+            textMessage = "";
+        }
+        if (eAgencyStatus === 'Deleted') {
+            titleMessage = "@T("Notification.Delete")";
+            message = "Deleted";
+            textMessage = "@T("Notification.DeleteMessage")";
+        }
+        swal({
+            title: titleMessage,
+            text: textMessage,
+            icon: "info",
+            buttons: true,
+            dangerMode: true
+        }).then((clickYes) => {
+            if (clickYes) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Agency/UpdateStatus/" + id,
+                    data: {
+                        eAgencyStatus: eAgencyStatus
+                    },
+                    success: function (data) {
+                       if (data.code == 0) {
+                            toastr.success(message + " " + error[0].Message);
+
+                            getListAgency(@ViewBag.Page);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="modal"]').tooltip()
+    })
+
+</script>
+--}}
