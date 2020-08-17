@@ -79,21 +79,46 @@
                                         </div>
                                         {{!-- Attribute Column Data --}}
                                             <th>
-                                                <input type="checkbox" id="check_id" name="checkcolumn" data-attr="id" hidden>
-                                                <label for="check_id"></label>
-                                                ID
-                                            </th>
-                                            <th>
                                                 <input type="checkbox" id="check_name" name="checkcolumn" data-attr="name" hidden>
                                                 <label for="check_name"></label>
                                                 Name
+                                            </th>
+                                            <th>
+                                                <input type="checkbox" id="check_code" name="checkcolumn" data-attr="code" hidden>
+                                                <label for="check_code"></label>
+                                                Code
+                                            </th>
+                                            <th>
+                                                <input type="checkbox" id="check_category" name="checkcolumn" data-attr="category" hidden>
+                                                <label for="check_category"></label>
+                                                Category
+                                            </th>
+                                            <th>
+                                                <input type="checkbox" id="check_createDate" name="checkcolumn" data-attr="createDate" hidden>
+                                                <label for="check_createDate"></label>
+                                                Create Date
+                                            </th>
+                                            <th>
+                                                <input type="checkbox" id="check_quantity" name="checkcolumn" data-attr="quantity" hidden>
+                                                <label for="check_quantity"></label>
+                                                Quantity
+                                            </th>
+                                            <th>
+                                                <input type="checkbox" id="check_discount" name="checkcolumn" data-attr="discount" hidden>
+                                                <label for="check_discount"></label>
+                                                Discount
+                                            </th>
+                                            <th>
+                                                <input type="checkbox" id="check_price" name="checkcolumn" data-attr="price" hidden>
+                                                <label for="check_price"></label>
+                                                Price
                                             </th>
                                             <th>Action</th>
                                         {{!-- end Attribute Column Data --}}
                                 </tr>
                             </thead>
                             <tbody id="table-body">
-                                {{#each categorys}}
+                                {{#each products}}
                                     <tr class="text-center" id='row_{{{Id}}}'>
                                         <td class="checkbox-custom  ">
                                             <div class="custom-control custom-checkbox">
@@ -101,8 +126,18 @@
                                                 <label class="custom-control-label" for="checkbox">&nbsp;</label>
                                             </div>
                                         </td>
-                                        <td class="text-center">{{{Id}}}</td>
                                         <td class="text-center">{{{Name}}}</td>
+                                        <td class="text-center">{{{Code}}}</td>
+                                            {{!-- {{#each categorys}}
+                                                {{#if this.Id}}
+                                                     <td class="text-center">{{{this.Name}}}</td>
+                                                {{/if}}
+                                            {{/each}} --}}
+                                        <td class="text-center">Trà chanh</td>
+                                        <td class="text-center">{{{CreateDate}}}</td>
+                                        <td class="text-center">{{{Quantity}}}</td>
+                                        <td class="text-center">{{{Discount}}}</td>
+                                        <td class="text-center">{{{Price}}}</td>
                                         <td class=" text-center">
                                             <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{Id}}} onclick="editSingle(this, '/admin/category/update/{{{Id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
                                             <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{Id}}} data-url='/admin/category/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>

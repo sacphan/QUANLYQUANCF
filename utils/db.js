@@ -66,7 +66,7 @@ exports.update=(tbName,idField,entity)=>
         });
        
         const id=entity[idField];
-        delete entity[idField];
+        //delete entity[idField];
         
         const sql=`UPDATE ${tbName} SET ? WHERE ${idField}=${id}`;
         con.query(sql,entity,(error,result,fields)=>{

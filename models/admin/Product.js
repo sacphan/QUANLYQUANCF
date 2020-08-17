@@ -1,5 +1,5 @@
 const db  = require('../../utils/db')
-const tbName = 'category';
+const tbName = 'stock';
 
 module.exports = {
     all: async() => {

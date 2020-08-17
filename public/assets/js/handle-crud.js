@@ -31,6 +31,7 @@ function getAdddata(url, modalID) {
 }
 
 // catch event add quick in view
+
 function addQuick(element, url, tbodyID) {
     let modalID = $(element).attr('data-target').slice(1);
     let jqueryModalId = "#" + modalID;
@@ -45,12 +46,6 @@ function addQuick(element, url, tbodyID) {
             // unblockUI
             $.unblockUI();
         })
-        .catch( err =>{
-            console.log("GET add error: ");
-            console.log(err);
-            // unblockUI
-            $.unblockUI();
-        });
 
 }
 
@@ -59,7 +54,6 @@ function modifyAdd(url, modalID, tbodyID) {
     let addData = getAdddata(url,modalID);
     $.when(ajaxRequest(addData.url, addData.data))
         .then(res =>{
-            console.log(res)
             clearAlert(modalID);
             // status = -1 => modify setting refused
             // status = 0 => modify setting fail
@@ -71,6 +65,7 @@ function modifyAdd(url, modalID, tbodyID) {
                 // close modal
                 //offModal(modalID);
                 // add row into beginning of the table
+                console.log(res.data)
                 $(`#${tbodyID} tr:first`).before(res.data);
 
                 // toastr success
@@ -90,9 +85,8 @@ function modifyAdd(url, modalID, tbodyID) {
 function modifyUpdate(url, modalID, tbodyID) {
     // get request data
     let addData = getAdddata(url,modalID);
-
     $.when(ajaxRequest(addData.url, addData.data))
-        .then(res =>{
+        .then(res =>{   
             clearAlert(modalID);
             // status = -1 => modify setting refused
             // status = 0 => modify setting fail
@@ -106,7 +100,9 @@ function modifyUpdate(url, modalID, tbodyID) {
 
                 // add row above edit row the table
                 // then delete the current one
-                let currentRow = $(`#${tbodyID} tr.${res.id}`);
+                var rowId = 'row_' + res.id;
+                let currentRow = $('#' + rowId);
+                console.log(currentRow)
                 currentRow.before(res.data);
                 currentRow.remove();
 
@@ -142,12 +138,12 @@ function editSingle(element, url, tbodyID) {
     let modalID = $(element).attr('data-target').slice(1);
     let mId = $(element).attr('data-id');
     let data = {id:mId}
+    console.log('ojk')
     // blockUI
     blockUI();
     // get element data & fill in the modal
     $.when(ajaxRequest(url, data, 'GET'))
         .then( data =>{
-            console.log(data)
             // render modal
             $(`#${modalID}`).html(data.modal);
 
@@ -226,7 +222,7 @@ function accept() {
     var url = $('#modal_btn_yes').data("url")
     var dataDelete = $('#modal_btn_yes').data("datadelete")
     showConfirmModal(2)
-    callAjax(url,dataDelete,'POST')
+    callAjax(url,dataDelete)
 }
 
 //reject modal

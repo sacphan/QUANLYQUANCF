@@ -1,25 +1,25 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-var CategoryController = require('../../controllers/admin/CategoryController');
+var ProductController = require('../../controllers/admin/ProductController');
 
 router.get('/',function(req,res,next){
-    CategoryController.index(req,res);
+    ProductController.index(req,res);
 });
 router.get('/add',function(req,res,next){
-    CategoryController.getAdd(req,res);
+    ProductController.getAdd(req,res);
 })
 router.post('/add',function(req,res,next){
-    CategoryController.postAdd(req,res);
+    ProductController.postAdd(req,res);
 })
 router.get('/update/:id',function(req,res,next){
-    CategoryController.getUpdate(req,res);
+    ProductController.getUpdate(req,res);
 })
 router.post('/update/:id',function(req,res,next){
-    CategoryController.postUpdate(req,res);
+    ProductController.postUpdate(req,res);
 })
 router.post('/delete',function(req,res,next){
-    CategoryController.postDelete(req,res);
+    ProductController.postDelete(req,res);
 })
 
 module.exports =  router;
