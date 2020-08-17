@@ -5,7 +5,7 @@ const mysql = require("mysql");
 const moment = require("moment");
 module.exports = {
     all: async() => {
-        const sql = `SELECT * FROM ${tbName}`;   
+        const sql = `SELECT * FROM ${tbName} where StatusDelete!= -1`;   
      
         const rows = await db.load(sql);
         rows.forEach(element => {

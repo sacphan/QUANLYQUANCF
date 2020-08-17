@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const accountM = require("../models/AccountsM");
 var dateFormat = require('dateformat');
+var nodemailer = require("nodemailer");
 // router.use(passport.initialize());
 // router.use(passport.session());
 // router.use(require('../config/passport')(passport));
