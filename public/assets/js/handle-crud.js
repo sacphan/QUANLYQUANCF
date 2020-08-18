@@ -52,6 +52,7 @@ function addQuick(element, url, tbodyID) {
 function modifyAdd(url, modalID, tbodyID) {
     // get request data
     let addData = getAdddata(url,modalID);
+    console.log(addData.data)
     $.when(ajaxRequest(addData.url, addData.data))
         .then(res =>{
             clearAlert(modalID);
