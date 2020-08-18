@@ -10,7 +10,7 @@ exports.index = async (req,res,next) =>{
 };
 
 exports.getAdd = (req,res) =>{
-    res.render('admin/category/modal/add',{title: 'Add Category',layout:'layoutadmin'},function(err,html){
+    res.render('admin/category/modal/add',{title: 'Add Category',layout:false},function(err,html){
         if(err)
             res.json({status: false, modal: null});
         var data = {status: true,modal: html}
@@ -25,14 +25,16 @@ exports.postAdd = async (req,res,next) =>{
     {
         var name  = req.body.data.name
         var category = {
-            id: null,
-            name:name
+            Id: null,
+            Name:name
         }
         var nId = await Category.add(category);
-        category.id = nId;
+        console.log(nId)
+        category.Id = nId;
         if(nId)
         {
-            res.render('admin/category/ajaxAddrow',{layout:false, category: category,layout:'layoutadmin'},function(err,html){
+            console.log(category)
+            res.render('admin/category/ajaxAddrow',{layout:false, category: category},function(err,html){
                 if(err)
                     res.json({data:null,status:-1,title:'Add Category',message: 'Fail'})
                 else{
@@ -50,14 +52,45 @@ exports.postAdd = async (req,res,next) =>{
     }
 };
 
-exports.getUpdate = async (req,res,next) => {
-    var id = req.body
-    console.log(id)
-    // var row = await Category.find(id);
-    // console.log(row)
-    // res.render('admin/category/modal/update',{layout:false,category:row},(err,html) => {
-    //     if(err)
-    //         res.json({status:false,modal:null})
-    //     res.json({status:success,modal:html})
-    // })
+exports.getUpdate = async (req,res) => {
+    var id = req.params.id
+    var row = await Category.find(id);
+    res.render('admin/category/modal/update',{layout:false,category:row[0],title: 'Update Category'},(err,html) => {
+        if(err)
+            res.json({status:false,modal:null})
+        res.json({status:'success',modal:html})
+    })
 };
+
+exports.postUpdate = async (req,res) => {
+    var mId = req.params.id
+    
+    var name = req.body.data.name
+    var data = {
+        Id: mId,
+        Name: name
+    }
+    var status = await Category.update('Id',data);
+    data.Id = mId 
+    res.render('admin/category/ajaxAddrow',{category:data,layout:false},function(err,html){
+        if(status == true)    
+        {
+            return  res.json({id:mId, data:html, status: 1, message: 'Success', title:'Update Category'})
+        }
+        return res.json({data:null,status:-1,message: 'Fail',title:'Update Category'})
+    })
+}
+
+exports.postDelete = async (req,res) => {
+    var idArr = req.body.data.idArr
+    
+    for(id of idArr)
+    {
+        var category = await Category.find(id)
+        category = category[0]
+        var status = await Category.delete('Id',category)
+        if(status == null)
+            return res.json({status:false, message: 'Fail!!', data:null})
+    }
+    return res.json({status:true,message:'Success', data:idArr})
+}

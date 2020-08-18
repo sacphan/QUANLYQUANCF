@@ -1,16 +1,16 @@
 
 
- <tr class="text-center" id='row_{{{category.id}}}'>
+ <tr class="text-center" id='row_{{{category.Id}}}'>
     <td class="checkbox-custom  ">
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" name="checkrow" value="{{{category.id}}}" class="custom-control-input delete-checkbox" id="checkbox">
+            <input type="checkbox" name="checkrow" value="{{{category.Id}}}" class="custom-control-input delete-checkbox" id="checkbox">
             <label class="custom-control-label" for="checkbox">&nbsp;</label>
         </div>
     </td>
-    <td class="text-center">{{{category.id}}}</td>
-    <td class="text-center">{{{category.name}}}</td>
+    <td class="text-center">{{{category.Id}}}</td>
+    <td class="text-center">{{{category.Name}}}</td>
     <td class=" text-center">
-        <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{category.id}}} onclick="editSingle(this, '/admin/category/update/{{{category.id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
-        <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{category.id}}} data-url='/admin/category/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>
+        <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{category.Id}}} onclick="editSingle(this, '/admin/category/update/{{{category.Id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
+        <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{category.Id}}} data-url='/admin/category/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>
     </td>
 </tr>
