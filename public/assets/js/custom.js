@@ -91,6 +91,10 @@ function getRkey(modalID) {
         let temp = $(item).attr('name');
         lsKey.push(temp);
     });
+    $(`#${modalID} select`).each( (index, item) =>{
+        let temp = $(item).attr('name');
+        lsKey.push(temp);
+    });
 
     return lsKey;
 }
