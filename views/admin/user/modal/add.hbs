@@ -1,0 +1,82 @@
+<div id="add-quick-modal">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{{title}}}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!--Modal body-->
+        <div class="modal-body center">
+           <form id="formAgency" class="form-horizontal">
+                    <div class="form-group" >
+                        <label class="col-md-12">Họ và tên</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="fullname" name="fullname"  required maxlength="100" />                          
+                        </div>
+                    </div>  
+                    <div class="form-group" id="divName">
+                        <label class="col-md-12">Username</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="username" name="username"  required maxlength="100" />                          
+                        </div>
+                    </div>   
+                     <div class="form-group" id="divName">
+                        <label class="col-md-12">Mật khẩu</label>
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" id="password" name="password"  required maxlength="100" />                          
+                        </div>
+                    </div> 
+                    <div class="form-group" id="divName">
+                        <label class="col-md-12">Nhập lại mật khẩu</label>
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" id="repassword" name="repassword"  required maxlength="100" />                          
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label class="col-md-12">Email</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="email" name="email"  required maxlength="100" />                          
+                        </div>
+                    </div>                
+                
+                    <div class="form-group" >
+                        <label class="col-md-12">Ngày sinh</label>
+                        <div class="col-md-12">
+                            <input type="date" class="form-control" id="birthday" name="birthday"  required maxlength="100" />                          
+                        </div>
+                    </div>  
+                    <div class="form-group" >
+                        <label class="col-md-12">Địa chỉ</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="address" name="address"  required maxlength="100" />                          
+                        </div>
+                    </div>  
+                    <div class="form-group" >
+                        <label class="col-md-12">Số điện thoại</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="phone" name="phone"  required maxlength="100" />                          
+                        </div>
+                    </div>  
+                    <div class="form-group" >
+                        <label class="col-md-12">Role</label>
+                        <div class="col-md-12">
+                            <select class="form-control custom-select" id="role" name="role" required>
+                                <option value="1">Nhân viên</option>
+                                <option value="2">Admin</option>
+                            
+                            </select>
+                        </div>
+                    </div>
+                </form>
+        </div><!--modal content-->
+
+        <div class="modal-footer">
+            <a href="#" type="button" onclick="clearModal('add-quick-modal')" class="btn btn-secondary" data-dismiss="modal">Đóng</a>
+            <a href="javascript:void(0);" type="submit" name="modal-action" class="btn btn-primary">Lưu</a>
+        </div>
+
+    </div>
+</div>
+</div>
