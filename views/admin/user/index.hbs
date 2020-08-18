@@ -61,7 +61,7 @@
 
                         {{!-- Menu Right --}}
                         <div class="right-items-custom">
-                            <a data-toggle="modal" data-target="#add-quick-modal" href="" onclick="addQuick( this,'/admin/product/add', 'table-body' )"  class="btn btn-success btn-rounded waves-effect waves-light mb-2"><i class="mdi mdi-plus mr-1"></i>Add Quick</a>
+                            <a data-toggle="modal" data-target="#add-quick-modal" href="" onclick="addQuick( this,'/admin/user/add', 'table-body' )"  class="btn btn-success btn-rounded waves-effect waves-light mb-2"><i class="mdi mdi-plus mr-1"></i>Add Quick</a>
                         </div>
                         {{!-- end Menu Right --}}
                     </div>
@@ -81,68 +81,62 @@
                                             <th>
                                                 <input type="checkbox" id="check_name" name="checkcolumn" data-attr="name" hidden>
                                                 <label for="check_name"></label>
-                                                Name
+                                                Username
                                             </th>
                                             <th>
-                                                <input type="checkbox" id="check_code" name="checkcolumn" data-attr="code" hidden>
+                                                <input type="checkbox" id="check_email" name="checkcolumn" data-attr="email" hidden>
                                                 <label for="check_code"></label>
-                                                Code
+                                                Email
                                             </th>
                                             <th>
-                                                <input type="checkbox" id="check_category" name="checkcolumn" data-attr="category" hidden>
-                                                <label for="check_category"></label>
-                                                Category
+                                                <input type="checkbox" id="check_birthday" name="checkcolumn" data-attr="birthday" hidden>
+                                                <label for="check_birthdatey"></label>
+                                                Ngày sinh
                                             </th>
                                             <th>
-                                                <input type="checkbox" id="check_createDate" name="checkcolumn" data-attr="createDate" hidden>
-                                                <label for="check_createDate"></label>
-                                                Create Date
+                                                <input type="checkbox" id="check_address" name="checkcolumn" data-attr="address" hidden>
+                                                <label for="check_address"></label>
+                                                Địa chỉ
                                             </th>
                                             <th>
-                                                <input type="checkbox" id="check_quantity" name="checkcolumn" data-attr="quantity" hidden>
-                                                <label for="check_quantity"></label>
-                                                Quantity
+                                                <input type="checkbox" id="check_phone" name="checkcolumn" data-attr="phone" hidden>
+                                                <label for="check_phone"></label>
+                                                Số điện thoại
                                             </th>
                                             <th>
-                                                <input type="checkbox" id="check_discount" name="checkcolumn" data-attr="discount" hidden>
-                                                <label for="check_discount"></label>
-                                                Discount
+                                                <input type="checkbox" id="check_fullname" name="checkcolumn" data-attr="fullname" hidden>
+                                                <label for="check_fullname"></label>
+                                                Họ và tên
                                             </th>
                                             <th>
-                                                <input type="checkbox" id="check_price" name="checkcolumn" data-attr="priceIn" hidden>
-                                                <label for="check_price"></label>
-                                                Price In
-                                            </th>
-                                            <th>
-                                                <input type="checkbox" id="check_price" name="checkcolumn" data-attr="priceOut" hidden>
-                                                <label for="check_price"></label>
-                                                Price Out
+                                                <input type="checkbox" id="check_fullname" name="checkcolumn" data-attr="role" hidden>
+                                                <label for="check_role"></label>
+                                                Loại TK
                                             </th>
                                             <th>Action</th>
                                         {{!-- end Attribute Column Data --}}
                                 </tr>
                             </thead>
                             <tbody id="table-body">
-                                {{#each products}}
+                                {{#each users}}
                                     <tr class="text-center" id='row_{{{Id}}}'>
                                         <td class="checkbox-custom  ">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" id='{{Id}}' name="checkrow" value="{{{Id}}}" class="custom-control-input delete-checkbox" id="checkbox">
-                                                <label class="custom-control-label" for="checkbox">&nbsp;</label>
+                                                <label class="custom-control-label" for="{{Id}}">&nbsp;</label>
                                             </div>
                                         </td>
-                                        <td class="text-center">{{{Name}}}</td>
-                                        <td class="text-center">{{{Code}}}</td>
-                                        
-                                        <td class="text-center">{{{CategoryName}}}</td>
-                                        <td class="text-center">{{{CreateDate}}}</td>
-                                        <td class="text-center">{{{Quantity}}}</td>
-                                        <td class="text-center">{{{Discount}}}</td>
-                                        <td class="text-center">{{{PriceIn}}}</td>
-                                         <td class="text-center">{{{PriceOut}}}</td>
+                                        <td class="text-center">{{{UserName}}}</td>
+                                        <td class="text-center">{{{Email}}}</td>
+            
+                                        <td class="text-center">{{{BirthDay}}}</td>
+                                        <td class="text-center">{{{Address}}}</td>
+                                        <td class="text-center">{{{Phone}}}</td>
+                                        <td class="text-center">{{{FullName}}}</td>
+                                        <td class="text-center">{{{Role}}}</td>
                                         <td class=" text-center">
-                                            <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{Id}}} onclick="editSingle(this, '/admin/product/update/{{{Id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
-                                            <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{Id}}} data-url='/admin/product/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>
+                                            <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{Id}}} onclick="editSingle(this, '/admin/user/update/{{{Id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
+                                            <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{Id}}} data-url='/admin/user/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>
                                         </td>
                                     </tr>
                                 {{/each}}
