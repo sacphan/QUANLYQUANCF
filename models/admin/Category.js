@@ -15,6 +15,15 @@ module.exports = {
         var sql = `SELECT * FROM ${tbName} WHERE ID = ${id}`;
         var rows = await db.load(sql);
         return rows;
+    },
+    update: async(idField,category) => {
+        var status = db.update(tbName,idField,category)
+        return status;
+    },
+    delete: async(idField,category) => {
+        var sql = `DELETE FROM ${tbName} WHERE ${idField} = ${category.Id}`
+        var status = await db.load(sql)
+        return status;
     }
 }
 

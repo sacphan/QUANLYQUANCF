@@ -15,4 +15,10 @@ router.post('/add',function(req,res,next){
 router.get('/update/:id',function(req,res,next){
     CategoryController.getUpdate(req,res);
 })
+router.post('/update/:id',function(req,res,next){
+    CategoryController.postUpdate(req,res);
+})
+router.post('/delete/',function(req,res,next){
+    CategoryController.postDelete(req,res);
+})
 module.exports =  router;
