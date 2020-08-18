@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="col-sm-12 col-md-2">
-                        <select class="select form-control" data-select2-id="1" tabindex="-1" aria-hidden="true" id="Status">
+                        <select class="select form-control" data-select2-id="1" tabindex="-1" aria-hidden="true" id="StatusSearch">
                             <option value="0">All</option>
                             {{#each purchaseorderstatustable}}
                             <option value={{Id}}>{{Name}}</option>
@@ -156,19 +156,19 @@
                     <div class="form-group" >
                         <label class="col-md-12">Tổng tiền</label>
                         <div class="col-md-12">
-                            <input type="text" class="form-control" id="totalprice" name="totalprice" placeholder="Mã nhập hàng" required maxlength="100" />                          
+                            <input type="text" class="form-control" id="totalprice" name="totalprice" placeholder="Tổng tiền" required maxlength="100" />                          
                         </div>
                     </div>  
                     <div class="form-group" >
                         <label class="col-md-12">Giảm giá</label>
                         <div class="col-md-12">
-                            <input type="text" class="form-control" id="discount" name="discount" placeholder="Mã nhập hàng" required maxlength="100" />                          
+                            <input type="text" class="form-control" id="discount" name="discount" placeholder="Giảm giá" required maxlength="100" />                          
                         </div>
                     </div>  
                     <div class="form-group" >
                         <label class="col-md-12">Số tiền nhận từ khách</label>
                         <div class="col-md-12">
-                            <input type="text" class="form-control" id="givenpricesupplier" name="givenpricesupplier" placeholder="Mã nhập hàng" required maxlength="100" />                          
+                            <input type="text" class="form-control" id="givenpricesupplier" name="givenpricesupplier" placeholder="Số tiền nhận từ khách" required maxlength="100" />                          
                         </div>
                     </div>  
                    
@@ -313,5 +313,30 @@ $(".Delete").click(function(){
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="modal"]').tooltip()
     })
-
+    $("#SearchDate").click(function(){
+        var Top= $("#Top").val();
+        var KeyWord = $("#Keyword").val();
+        var Status = $("#StatusSearch").val();
+        var StartDate = $("#StartDate").val();
+        var EndDate = $("#EndDate").val();
+          $.ajax({
+                    type: "POST",
+                    url: "/Admin/PurchaseOrder/Filter" ,
+                    data: {
+                       
+                        Top: Top,
+                        KeyWord:KeyWord,
+                        Status:Status,
+                         StartDate:StartDate,
+                        EndDate:EndDate,
+                        
+                    },
+                    success: function (data) {
+                       
+                            toastr.success( "Edit sucessfull");
+                             location.reload();
+                        
+                    }
+                });
+    })
 </script>

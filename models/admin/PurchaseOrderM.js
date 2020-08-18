@@ -5,7 +5,7 @@ const mysql = require("mysql");
 const moment = require("moment");
 module.exports = {
     all: async() => {
-        const sql = `SELECT * FROM ${tbName} where StatusDelete!= -1`;   
+        const sql = `SELECT * FROM ${tbName} where StatusDelete!= -1 order by Id desc`;   
      
         const rows = await db.load(sql);
         rows.forEach(element => {
@@ -40,5 +40,15 @@ module.exports = {
         const resultinfo=await db.update(tbName,idField,entity);
         return resultinfo;
        
+    }, 
+    filter: async (KeyWord,Status,CreateDate,Top)=>
+    {
+        const sql = `SELECT * FROM ${tbName} where StatusDelete!= -1 and KeyWord like '%${KeyWord}%' order by Id desc`;   
+     
+        const rows = await db.load(sql);
+        rows.forEach(element => {
+            element.CreateDate = moment(element.CreateDate).format("DD-MM-YYYY");
+        });
+        return rows;
     }
 }
