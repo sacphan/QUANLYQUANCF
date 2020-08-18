@@ -12,13 +12,14 @@ exports.index = async (req,res,next) =>{
     {
         let element = product[i]
         let categoryE = await Category.find(element.CatID)
-        element.categoryName = categoryE.Name
+        element.CategoryName = categoryE.Name
     }
     res.render('admin/product/index',{title: 'Product', products: product, categorys:category, layout:'layoutadmin'});
 };
 
-exports.getAdd = (req,res) =>{
-    res.render('admin/product/modal/add',{title: 'Add Product',layout:false},function(err,html){
+exports.getAdd = async (req,res) =>{
+    var category = await Category.all();
+    res.render('admin/product/modal/add',{title: 'Add Product',layout:false,categorys:category},function(err,html){
         if(err)
             res.json({status: false, modal: null});
         var data = {status: true,modal: html}
@@ -32,9 +33,26 @@ exports.postAdd = async (req,res,next) =>{
     if(isAjaxRequest)
     {
         var name  = req.body.data.name
+        var code = req.body.data.code
+        var catId = req.body.data.catId
+        var createDate = req.body.data.createDate
+        var quantity = req.body.data.quantity
+        var discount = req.body.data.discount
+        var priceIn = req.body.data.priceIn
+        var priceOut = req.body.data.priceOut
+        console.log(catId)
+        // let categoryName = await Category.find(catId)
+        // categoryName = categoryName[0].Name
         var product = {
-            id: null,
-            name:name
+            Id: null,
+            Name:name,
+            Code:code,
+            CatId:catId,
+            CreateDate:createDate,
+            Quantity:quantity,
+            Discount:discount,
+            PriceIn: priceIn,
+            PriceOut: priceOut
         }
         var nId = await Product.add(product);
         product.id = nId;

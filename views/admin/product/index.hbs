@@ -53,7 +53,7 @@
                     <div class="row items-custom">
                         {{!-- Menu Left --}}
                             <div class="left-items-custom">
-                                <a class="btn btn-danger btn-rounded waves-effect waves-light mb-2 mr-2" data-url='/admin/category/delete' data-flag="all" onclick="getAllObj(this)">Delete</a>
+                                <a class="btn btn-danger btn-rounded waves-effect waves-light mb-2 mr-2" data-url='/admin/product/delete' data-flag="all" onclick="getAllObj(this)">Delete</a>
                                 <a class="btn btn btn-outline-primary btn-rounded waves-effect waves-light mb-2 mr-2">Excel</a>
                                 <a data-type="pdf" class="btn btn btn-outline-warning btn-rounded waves-effect waves-light mb-2 mr-2">PDF</a>
                             </div>
@@ -61,7 +61,7 @@
 
                         {{!-- Menu Right --}}
                         <div class="right-items-custom">
-                            <a data-toggle="modal" data-target="#add-quick-modal" href="" onclick="addQuick( this,'/admin/category/add', 'table-body' )"  class="btn btn-success btn-rounded waves-effect waves-light mb-2"><i class="mdi mdi-plus mr-1"></i>Add Quick</a>
+                            <a data-toggle="modal" data-target="#add-quick-modal" href="" onclick="addQuick( this,'/admin/product/add', 'table-body' )"  class="btn btn-success btn-rounded waves-effect waves-light mb-2"><i class="mdi mdi-plus mr-1"></i>Add Quick</a>
                         </div>
                         {{!-- end Menu Right --}}
                     </div>
@@ -109,9 +109,14 @@
                                                 Discount
                                             </th>
                                             <th>
-                                                <input type="checkbox" id="check_price" name="checkcolumn" data-attr="price" hidden>
+                                                <input type="checkbox" id="check_price" name="checkcolumn" data-attr="priceIn" hidden>
                                                 <label for="check_price"></label>
-                                                Price
+                                                Price In
+                                            </th>
+                                            <th>
+                                                <input type="checkbox" id="check_price" name="checkcolumn" data-attr="priceOut" hidden>
+                                                <label for="check_price"></label>
+                                                Price Out
                                             </th>
                                             <th>Action</th>
                                         {{!-- end Attribute Column Data --}}
@@ -128,19 +133,16 @@
                                         </td>
                                         <td class="text-center">{{{Name}}}</td>
                                         <td class="text-center">{{{Code}}}</td>
-                                            {{!-- {{#each categorys}}
-                                                {{#if this.Id}}
-                                                     <td class="text-center">{{{this.Name}}}</td>
-                                                {{/if}}
-                                            {{/each}} --}}
-                                        <td class="text-center">Trà chanh</td>
+                                        
+                                        <td class="text-center">{{{CategoryName}}}</td>
                                         <td class="text-center">{{{CreateDate}}}</td>
                                         <td class="text-center">{{{Quantity}}}</td>
                                         <td class="text-center">{{{Discount}}}</td>
-                                        <td class="text-center">{{{Price}}}</td>
+                                        <td class="text-center">{{{PriceIn}}}</td>
+                                         <td class="text-center">{{{PriceOut}}}</td>
                                         <td class=" text-center">
-                                            <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{Id}}} onclick="editSingle(this, '/admin/category/update/{{{Id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
-                                            <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{Id}}} data-url='/admin/category/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>
+                                            <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{Id}}} onclick="editSingle(this, '/admin/product/update/{{{Id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
+                                            <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{Id}}} data-url='/admin/product/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>
                                         </td>
                                     </tr>
                                 {{/each}}

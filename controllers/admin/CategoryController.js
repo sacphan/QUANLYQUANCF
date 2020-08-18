@@ -25,12 +25,12 @@ exports.postAdd = async (req,res,next) =>{
     {
         var name  = req.body.data.name
         var category = {
-            id: null,
-            name:name
+            Id: null,
+            Name:name
         }
         var nId = await Category.add(category);
         console.log(nId)
-        category.id = nId;
+        category.Id = nId;
         if(nId)
         {
             console.log(category)
