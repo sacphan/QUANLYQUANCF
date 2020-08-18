@@ -8,6 +8,12 @@ const Category = require('../../models/admin/Category');
 exports.index = async (req,res,next) =>{
     var product = await Product.all();
     var category = await Category.all();
+    for(let i=0;i<product.length;i++)
+    {
+        let element = product[i]
+        let categoryE = await Category.find(element.CatID)
+        element.categoryName = categoryE.Name
+    }
     res.render('admin/product/index',{title: 'Product', products: product, categorys:category, layout:'layoutadmin'});
 };
 
