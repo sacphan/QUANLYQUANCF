@@ -3,7 +3,7 @@
 <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-sm-6">
-                <h2 class="page-title">PurchaseOrder</h2>
+                <h2 class="page-title">Order</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">Welcome to Dashboard</li>
                 </ol>
@@ -77,28 +77,47 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Mã nhập hàng</th>
+                        <th>Mã hóa đơn</th>
                         <th>Thời gian</th>
-                        <th>Nhà cung cấp</th>
-                        <th>Trạng thái</th>
-                        <th>Tổng tiền</th>
+                        <th>Mã trả hàng</th>
+                        <th>Khách hàng</th>
+                      
                         <th>Giảm giá</th>
-                        <th>Số tiền nhận từ khách</th>
+                        <th>Tổng tiền hàng</th>
+                       
                         
                     </tr>
                 </thead>
                 <tbody> 
-                    {{#each PurchaseOrder}}                 
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{Orders.AllCashTotal}}</td>
+                       
+                    </tr>
+                    {{#each Orders}}                 
                             <tr class="tr-list-agency">
                                 <td style="display:none" class="Id">{{Id}}</td>
                                 <td>{{@index}}</td>
                                 <td class="code">{{Code}}</td>
-                                <td class="createdate">{{CreateDate}}</td>
-                                <td class="supplier" data-idsupplier="{{Supplier.Id}}">{{Supplier.Name}}</td> 
-                                <td class="status" data-idpurchaseorderstatus="{{purchaseorderstatus.Id}}">{{purchaseorderstatus.Name}}</td> 
-                                <td class="totalprice">{{TotalPrince}}</td>
+                                <td>{{CreateDate}}</td>
+                                <td></td>
+                                <td class="supplier" >
+                                    {{#if Id_Customer}}
+                                        Khách buôn
+                                    {{else}}
+                                        Khách lẻ
+                                    {{/if}}
+                                    
+                                </td> 
+                              
+                               
                                 <td class="discount" >{{Discount}}</td> 
-                                <td class="givenpricesupplier" >{{GivenPriceSupplier}}</td>                                  
+                                <td class="CashTotal" >{{CashTotal}}</td>                                
                                 <td class="modal-footer">
                                     <button  class="Edit btn waves-effect waves-light btn-outline-success" type="button" data-toggle="modal" data-target="#add-contact" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></button>
                                     <button  class="Delete btn waves-effect waves-light btn-outline-danger" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Delete" aria-describedby="tooltip67802"><i class="fa fa-trash"></i></button>                                                    
