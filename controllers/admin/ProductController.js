@@ -12,8 +12,11 @@ exports.index = async (req,res,next) =>{
     {
         let element = product[i]
         let categoryE = await Category.find(element.CatID)
-        element.CategoryName = categoryE.Name
+        element.CategoryName = categoryE[0].Name
+        let date = new Date(element.CreateDate)
+        element.CreateDate = dateFormat(date)
     }
+    console.log(product)
     res.render('admin/product/index',{title: 'Product', products: product, categorys:category, layout:'layoutadmin'});
 };
 
@@ -34,28 +37,28 @@ exports.postAdd = async (req,res,next) =>{
     {
         var name  = req.body.data.name
         var code = req.body.data.code
-        var catId = req.body.data.catId
-        var createDate = req.body.data.createDate
+        var catId = req.body.data.category
+        var dateCreate = req.body.data.dateCreate
         var quantity = req.body.data.quantity
         var discount = req.body.data.discount
         var priceIn = req.body.data.priceIn
         var priceOut = req.body.data.priceOut
-        console.log(catId)
-        // let categoryName = await Category.find(catId)
-        // categoryName = categoryName[0].Name
+        let categoryName = await Category.find(catId)
+        categoryName = categoryName[0].Name
         var product = {
             Id: null,
             Name:name,
             Code:code,
             CatId:catId,
-            CreateDate:createDate,
+            CreateDate:dateCreate,
             Quantity:quantity,
             Discount:discount,
             PriceIn: priceIn,
             PriceOut: priceOut
         }
         var nId = await Product.add(product);
-        product.id = nId;
+        product.Id = nId;
+        product.CategoryName = categoryName
         if(nId)
         {
             console.log(product)
@@ -80,7 +83,8 @@ exports.postAdd = async (req,res,next) =>{
 exports.getUpdate = async (req,res) => {
     var id = req.params.id
     var row = await Product.find(id);
-    res.render('admin/product/modal/update',{layout:false,product:row[0],title: 'Update Product'},(err,html) => {
+    var category = await Category.all()
+    res.render('admin/product/modal/update',{layout:false,product:row[0],title: 'Update Product',categorys:category},(err,html) => {
         if(err)
             res.json({status:false,modal:null})
         res.json({status:'success',modal:html})
@@ -90,13 +94,34 @@ exports.getUpdate = async (req,res) => {
 exports.postUpdate = async (req,res) => {
     var mId = req.params.id
     
-    var name = req.body.data.name
-    var data = {
-        Id: mId,
-        Name: name
+    var name  = req.body.data.name
+    var code = req.body.data.code
+    var catId = req.body.data.category
+    var dateCreate = req.body.data.dateCreate
+    var quantity = req.body.data.quantity
+    var discount = req.body.data.discount
+    var priceIn = req.body.data.priceIn
+    var priceOut = req.body.data.priceOut
+    let categoryName = await Category.find(catId)
+    categoryName = categoryName[0].Name
+    var product = {
+        Id: null,
+        Name:name,
+        Code:code,
+        CatId:catId,
+        CreateDate:dateCreate,
+        Quantity:quantity,
+        Discount:discount,
+        PriceIn: priceIn,
+        PriceOut: priceOut
     }
-    var status = await Product.update('Id',data);
-    res.render('admin/Product/ajaxAddrow',{product:data,layout:false},function(err,html){
+    var status = await Product.update('Id',product);
+    product.Id = mId
+    product.CategoryName = categoryName
+    let date = new Date(dateCreate)
+    product.CreateDate = dateFormat(date)
+    console.log(product.CreateDate)
+    res.render('admin/Product/ajaxAddrow',{product:product,layout:false},function(err,html){
         if(status == true)    
         {
             return  res.json({id:mId, data:html, status: 1, message: 'Success', title:'Update Product'})
@@ -117,4 +142,12 @@ exports.postDelete = async (req,res) => {
             return res.json({status:false, message: 'Fail!!', data:null})
     }
     return res.json({status:true,message:'Success', data:idArr})
+}
+
+function dateFormat(a)
+{
+    var day = a.getUTCDate()
+    var month = a.getMonth()+1
+    var year = a.getFullYear();
+    return `${month}/${day}/${year}`
 }

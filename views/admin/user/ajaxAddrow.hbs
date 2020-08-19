@@ -1,0 +1,20 @@
+<tr class="text-center" id='row_{{{Id}}}'>
+    <td class="checkbox-custom  ">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" id='{{user.Id}}' name="checkrow" value="{{{user.Id}}}" class="custom-control-input delete-checkbox" id="checkbox">
+            <label class="custom-control-label" for="{{Id}}">&nbsp;</label>
+        </div>
+    </td>
+    <td class="text-center">{{{user.UserName}}}</td>
+    <td class="text-center">{{{user.Email}}}</td>
+
+    <td class="text-center">{{{user.BirthDay}}}</td>
+    <td class="text-center">{{{user.Address}}}</td>
+    <td class="text-center">{{{user.Phone}}}</td>
+    <td class="text-center">{{{user.FullName}}}</td>
+    <td class="text-center">{{{user.Role}}}</td>
+    <td class=" text-center">
+        <a data-toggle="modal" data-target="#add-quick-modal" data-id={{{user.Id}}} onclick="editSingle(this, '/admin/user/update/{{{user.Id}}}'  ,'table-body' )" href="javascript:void(0);"<i class="mdi mdi-pencil font-size-12"></i></a>
+        <a href="javascript:void(0);" onclick="getOneObj(this)" data-id={{{user.Id}}} data-url='/admin/user/delete' data-flag='1' <i class="mdi mdi-close font-size-12"></i></a>
+    </td>
+</tr>
