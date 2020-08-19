@@ -102,7 +102,7 @@ exports.postUpdate = async (req,res) => {
     var phone = req.body.data.phone
     var role = req.body.data.role
     var user = {
-        Id: null,
+        Id: mId,
         UserName:username,
         FullName:fullname,
         Password:password,

@@ -105,7 +105,7 @@ exports.postUpdate = async (req,res) => {
     let categoryName = await Category.find(catId)
     categoryName = categoryName[0].Name
     var product = {
-        Id: null,
+        Id: mId,
         Name:name,
         Code:code,
         CatId:catId,
