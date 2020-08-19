@@ -68,5 +68,18 @@ exports.Filter = async (req,res,next) =>{
     var Status = req.body.Status;
     var StartDate =  req.body.StartDate;
     var EndDate = req.body.EndDate;
+ 
+    var result = await PurchaseOrderM.filter(KeyWord,Status,StartDate,EndDate,Top);
+    var purchaseorderstatustable = await purchaseorderstatusM.all();
+    var supplierAll = await supplierM.all();
+    for (let index = 0; index < result.length; index++) {
+        const element = result[index];
+        element.purchaseorderstatus =await purchaseorderstatusM.getById(element.Status);     
+        element.Supplier =await supplierM.getById(element.SupplierId);
+        
+    }
+    console.log(result);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
     
 }

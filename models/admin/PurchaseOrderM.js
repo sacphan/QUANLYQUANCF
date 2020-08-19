@@ -3,12 +3,15 @@ const tbName = "purchaseorder";
 const idField="Id";
 const mysql = require("mysql");
 const moment = require("moment");
+const purchaseorderstatusM = require('./purchaseorderstatusM');
+const supplierM = require('./SupplierM');
 module.exports = {
     all: async() => {
         const sql = `SELECT * FROM ${tbName} where StatusDelete!= -1 order by Id desc`;   
      
         const rows = await db.load(sql);
         rows.forEach(element => {
+            
             element.CreateDate = moment(element.CreateDate).format("DD-MM-YYYY");
         });
         return rows;
@@ -41,9 +44,40 @@ module.exports = {
         return resultinfo;
        
     }, 
-    filter: async (KeyWord,Status,CreateDate,Top)=>
+    filter: async (KeyWord,Status,StartDate,EndDate,Top)=>
     {
-        const sql = `SELECT * FROM ${tbName} where StatusDelete!= -1 and KeyWord like '%${KeyWord}%' order by Id desc`;   
+       
+        if (StartDate=="")
+        {
+            StartDate =moment().add('days', -100).format("YYYY-MM-DD");
+        }
+        else
+        {
+            
+            var StartDate = moment(StartDate,"DD-MM-YYYY").format("YYYY-MM-DD")
+            
+        }
+        if (EndDate=="")
+        {
+            EndDate=moment().format("YYYY-MM-DD");
+        }
+        else
+        {
+            EndDate =  moment(EndDate,"DD-MM-YYYY").format("YYYY-MM-DD")
+        }
+       
+        
+        
+     
+        var sql;
+        if (Status != 0)
+        {
+             sql = `SELECT * FROM ${tbName}  where StatusDelete!= -1 and Code like '%${KeyWord}%' and Status=${Status} and date(CreateDate) BETWEEN '${StartDate}' and '${EndDate}' order by Id desc`;   
+        }
+        else{
+             sql = `SELECT * FROM ${tbName}  where StatusDelete!= -1 and Code like '%${KeyWord}%'  and date(CreateDate) BETWEEN '${StartDate}' and '${EndDate}' order by Id desc`;   
+        }
+        
      
         const rows = await db.load(sql);
         rows.forEach(element => {
