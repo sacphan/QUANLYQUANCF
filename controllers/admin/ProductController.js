@@ -6,6 +6,11 @@ const Category = require('../../models/admin/Category');
 
 
 exports.index = async (req,res,next) =>{
+    if (!req.session.user) {
+        res.redirect("/account/login");
+        return false;
+    }
+  
     var product = await Product.all();
     var category = await Category.all();
     for(let i=0;i<product.length;i++)

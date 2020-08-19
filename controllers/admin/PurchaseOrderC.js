@@ -3,7 +3,18 @@ const router = express.Router();
 const PurchaseOrderM = require('../../models/admin/PurchaseOrderM');
 const purchaseorderstatusM = require('../../models/admin/purchaseorderstatusM');
 const supplierM = require('../../models/admin/SupplierM');
+
 exports.index = async (req,res,next) =>{
+    if (!req.session.user) {
+        res.redirect("/account/login");
+        return false;
+    }
+    
+    if (req.session.Role==1)
+    {
+        res.redirect("/");
+        return false;
+    }
     var PurchaseOrder = await PurchaseOrderM.all();
     var purchaseorderstatustable = await purchaseorderstatusM.all();
     var supplierAll = await supplierM.all();

@@ -5,6 +5,10 @@ const exphbs = require("express-handlebars");
 
 
 exports.index = async (req,res,next) =>{
+    if (!req.session.user) {
+        res.redirect("/account/login");
+        return false;
+    }
     var category = await Category.all();
     res.render('admin/category/index',{title: 'Category', categorys: category,layout:'layoutadmin'});
 };
