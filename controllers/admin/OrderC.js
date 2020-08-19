@@ -1,7 +1,14 @@
 const OrderM = require('../../models/admin/OrderM');
 exports.index = async (req,res,next) =>{
+ 
     if (!req.session.user) {
         res.redirect("/account/login");
+        return false;
+    }
+    
+    if (req.session.Role==1)
+    {
+        res.redirect("/");
         return false;
     }
     var Orders =await OrderM.all();
