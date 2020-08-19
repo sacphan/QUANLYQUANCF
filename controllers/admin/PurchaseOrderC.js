@@ -62,3 +62,11 @@ exports.Delete = async (req,res,next) =>{
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify("Thành công"));
 }
+exports.Filter = async (req,res,next) =>{
+    var Top = req.body.Top;
+    var KeyWord = req.body.KeyWord;
+    var Status = req.body.Status;
+    var StartDate =  req.body.StartDate;
+    var EndDate = req.body.EndDate;
+    
+}

@@ -15,5 +15,8 @@ router.post('/Add',function(req,res,next){
 router.post('/Delete',function(req,res,next){
     PurchaseOrderController.Delete(req,res);
 });
+router.post('/Filter',function(req,res,next){
+    PurchaseOrderController.Filter(req,res);
+});
 
 module.exports =  router;
