@@ -100,8 +100,8 @@
                                 <td class="discount" >{{Discount}}</td> 
                                 <td class="givenpricesupplier" >{{GivenPriceSupplier}}</td>                                  
                                 <td class="modal-footer">
-                                    <button  class="Edit btn waves-effect waves-light btn-outline-success" type="button" data-toggle="modal" data-target="#add-contact" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></button>
-                                    <button  class="Delete btn waves-effect waves-light btn-outline-danger" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Delete" aria-describedby="tooltip67802"><i class="fa fa-trash"></i></button>                                                    
+                                    <button onclick="Edit(this)"  class="Edit btn waves-effect waves-light btn-outline-success" type="button" data-toggle="modal" data-target="#add-contact" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></button>
+                                    <button onclick="Delete(this)" class="Delete btn waves-effect waves-light btn-outline-danger" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Delete" aria-describedby="tooltip67802"><i class="fa fa-trash"></i></button>                                                    
                                 </td>
                             </tr>
                        {{/each}}
@@ -186,11 +186,11 @@
    
 <script>
 
-     $(".Edit").click(function() {
-        
+     function Edit(edit) {
+       
         $("#myModalLabel").text("Edit Purchase Order");
         // get the current row
-        var currentRow = $(this).closest("tr");      
+        var currentRow = $(edit).closest("tr");      
         var idsupplier = currentRow.find(".supplier").attr("data-idsupplier");
         var status = currentRow.find(".status").attr("data-idpurchaseorderstatus");
        var totalprice = currentRow.find(".totalprice").text();
@@ -239,11 +239,11 @@
         })
         
     
-    });
-$(".Delete").click(function(){
+    };
+function Delete(del){
      $("#myModalLabel").text("Edit Purchase Order");
         // get the current row
-    var currentRow = $(this).closest("tr");  
+    var currentRow = $(del).closest("tr");  
     var Id=currentRow.find(".Id").text();
   
     swal({
@@ -267,7 +267,7 @@ $(".Delete").click(function(){
                 });
             }
         });
-})
+};
    $("#addAgency").click(function(){
        $("#supplier").val("");
         $("#status").val("");
@@ -332,9 +332,34 @@ $(".Delete").click(function(){
                         
                     },
                     success: function (data) {
+                   
+                           console.log(data)
+                       $("#myTable tbody").html(``);
+                       for (let i=0;i< data.length;i++)
+                       {
+                            $("#myTable tbody").append(`
+                           
+                            <tr class="tr-list-agency">
+                                <td style="display:none" class="Id">${data[i].Id}</td>
+                                <td>${i}</td>
+                                <td class="code">${data[i].Code}</td>
+                                <td class="createdate">${data[i].CreateDate}</td>
+                                <td class="supplier" data-idsupplier="${data[i].Supplier.Id}">${data[i].Supplier.Name}</td> 
+                                <td class="status" data-idpurchaseorderstatus="${data[i].purchaseorderstatus.Id}">${data[i].purchaseorderstatus.Name}</td> 
+                                <td class="totalprice">${data[i].TotalPrince}</td>
+                                <td class="discount" >${data[i].Discount}</td> 
+                                <td class="givenpricesupplier" >${data[i].GivenPriceSupplier}</td>                                  
+                                <td class="modal-footer">
+                                    <button onclick="Edit(this)"  class="Edit btn waves-effect waves-light btn-outline-success" type="button" data-toggle="modal" data-target="#add-contact" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></button>
+                                    <button onclick="Delete(this)" class="Delete btn waves-effect waves-light btn-outline-danger" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Delete" aria-describedby="tooltip67802"><i class="fa fa-trash"></i></button>                                                    
+                                </td>
+                            </tr>`);
+                       }
                        
-                            toastr.success( "Edit sucessfull");
-                             location.reload();
+                          
+                       
+                          
+                         
                         
                     }
                 });
