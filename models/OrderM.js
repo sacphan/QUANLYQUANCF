@@ -1,5 +1,5 @@
 const db = require("../utils/db.js");
-const tbName = "order";
+const tbName = "`order`";
 const idField="Id";
 const mysql = require("mysql");
 
